@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <title>Offline Ueditor</title>
+    <link rel="stylesheet" href="/dist/themes/default/css/ueditor.min.css">
+    <script src="/dist/ueditor.config.js"></script>
+    <script src="/dist/ueditor.all.js"></script>
+    <script src="/dist/lang/zh-cn/zh-cn.js"></script>
+    <style>
+      html,body,#root {
+        height: 100%;
+        width: 100%;
+        min-height: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+      .ueditor-container{
+        height: 500px;
+        width: 60%;
+        min-width: 600px;
+        margin: 40px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root">
+      <div class="ueditor-container">
+        <script id="container" name="content" type="text/plain">
+          这里写你的初始化内容
+        </script>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var ue = UE.getEditor('container', {
+        initialFrameHeight: 400
+      });
+  </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>选择图片对话框</title>
+    <script type="text/javascript" src="../internal.js"></script>
+    <!-- jquery -->
+    <script type="text/javascript" src="../../third-party/jquery-1.10.2.min.js"></script>
+
+    <!-- image dialog -->
+    <link rel="stylesheet" href="image.css" type="text/css" />
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="alignBar" style="margin: 5px 0; float: none; height: 30px;">
+            <input id="imageSelectInput" type="file" style="float: left;" />
+            <span id="alignIcon" style="float: right;">
+                <span id="noneAlign" class="none-align focus" data-align="none"></span>
+                <span id="leftAlign" class="left-align" data-align="left"></span>
+                <span id="rightAlign" class="right-align" data-align="right"></span>
+                <span id="centerAlign" class="center-align" data-align="center"></span>
+            </span>
+            <input id="align" name="align" type="hidden" value="none"/>
+        </div>
+        <div id="tabbody" class="tabbody" style="position: relative;">
+            <img id="imageSelectShow" style="max-width: 100%; max-height: 100%; margin: 0 auto;" />
+        </div>
+    </div>
+    <script type="text/javascript" src="image.js"></script>
+</body>
+</html>
