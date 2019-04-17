@@ -106,10 +106,6 @@
     background-position: -726px -77px;
 }
 
-.edui-default  .edui-for-urlbase64 .edui-icon {
-    background-position: -380px 0px;
-}
-
 .edui-default  .edui-for-insertframe .edui-icon {
     background-position: -240px -40px;
 }
@@ -407,7 +403,7 @@
 }
 
 .edui-default  .edui-for-charts  .edui-icon {
-    background: url( ../images/charts.png ) no-repeat 2px 3px!important;
+    background: url(../images/charts.png) no-repeat 2px 3px!important;
 }
 
 .edui-default  .edui-for-inserttitlecol  .edui-icon {

@@ -420,7 +420,7 @@ div.edui-box {
 
 /*不可选中菜单按钮 */
 .edui-default .edui-toolbar .edui-combox-body .edui-button-body {
-    width: 67px;
+    width: 60px;
     font-size: 12px;
     height: 20px;
     line-height: 20px;
@@ -433,7 +433,7 @@ div.edui-box {
     background: url(../images/icons.png) -741px 0;
     _background: url(../images/icons.gif) -741px 0;
     height: 20px;
-    width: 12px;
+    width: 9px;
 }
 
 .edui-default .edui-toolbar .edui-combox .edui-combox-body {
@@ -629,10 +629,6 @@ div.edui-box {
 
 .edui-default  .edui-for-insertimage .edui-icon {
     background-position: -726px -77px;
-}
-
-.edui-default  .edui-for-urlbase64 .edui-icon {
-    background-position: -380px 0px;
 }
 
 .edui-default  .edui-for-insertframe .edui-icon {
@@ -932,7 +928,7 @@ div.edui-box {
 }
 
 .edui-default  .edui-for-charts  .edui-icon {
-    background: url( ../images/charts.png ) no-repeat 2px 3px!important;
+    background: url(../images/charts.png) no-repeat 2px 3px!important;
 }
 
 .edui-default  .edui-for-inserttitlecol  .edui-icon {
@@ -946,6 +942,7 @@ div.edui-box {
 .edui-default  .edui-for-simpleupload  .edui-icon {
     background-position: -380px 0px;
 }
+
 /*splitbutton*/
 .edui-default .edui-toolbar .edui-splitbutton-body .edui-arrow,
 .edui-default .edui-toolbar .edui-menubutton-body .edui-arrow {
@@ -1037,7 +1034,9 @@ div.edui-box {
     background-color: #ffffff;
     width:auto;
     height:auto;
-
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
 
 .edui-default .edui-popup .edui-shadow {
@@ -1403,13 +1402,6 @@ div.edui-box {
     width: 550px;
     height: 400px;
 }
-
-/*urlbase64-dialog*/
-.edui-default .edui-for-urlbase64 .edui-dialog-content {
-    width: 650px;
-    height: 400px;
-}
-
 
 /*gmap-dialog*/
 .edui-default .edui-for-gmap .edui-dialog-content {

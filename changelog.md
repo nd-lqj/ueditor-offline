@@ -1,5 +1,30 @@
 #UEditor Change List
 
+1、image.html/image.js删除在线图片、搜索图片功能，并修改上传图片功能为转换base64
+2、Gruntfile.js删除对disDir变量的修改。所有文件直接放到dist目录下面
+3、Editor.js注释掉 尝试异步加载后台配置
+4、defaultfilter.js 删除对base64img的过滤
+5、simpleupload.js 删除判断后端配置是否没有加载成功，并需改上传图片功能为转换base64
+6、zh-cn.js 修改lang_background_local和lang_tab_upload为“本地图片”
+7、en.js 修改lang_background_local为“Local”
+8、zh-cn.js/en.js 添加lang_background_select
+9、background.html/background.js删除在线图片、搜索图片功能，并修改上传图片功能为转换base64
+
+
+##1.5.0
+###bug修复&优化改进
+1.修复对嵌套的span标签设置样式时，被嵌套的标签不能正确设置上给定的样式
+
+##1.4.4
+###bug修复&优化改进
+1. 修复展示页中li没有加前置选择器，可能导致影响展示页中li的css问题
+2. 产出的数据中的color自动从rgb格式变成16进制格式
+3. 过滤掉word中粘贴过来的a标签被误命中为锚点
+4. 扩展的UI组件需要配置toolbars参数才可显示
+5. ASP 创建目录 BUG 修复
+6. JSP版本修复默认上传路径错误的bug。
+7. 添加链接前缀的白名单，白名单里的前缀不加 http://
+
 ##1.4.3
 ###bug修复&优化改进
 1. 修复hasContents接口在非ie下只有空格时判断还为真的问题

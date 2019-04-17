@@ -232,13 +232,6 @@
     height: 400px;
 }
 
-/*urlbase64-dialog*/
-.edui-default .edui-for-urlbase64 .edui-dialog-content {
-    width: 650px;
-    height: 400px;
-}
-
-
 /*gmap-dialog*/
 .edui-default .edui-for-gmap .edui-dialog-content {
     width: 550px;

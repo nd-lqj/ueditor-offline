@@ -7,6 +7,10 @@
 </head>
 <body>
     <div id="bg_container" class="wrapper">
+        <div id="tabHeads" class="tabhead">
+            <span class="focus" data-content-id="normal"><var id="lang_background_normal"></var></span>
+            <span class="" data-content-id="imgManager"><var id="lang_background_local"></var></span>
+        </div>
         <div id="tabBodys" class="tabbody">
             <div id="normal" class="panel focus">
                 <fieldset class="bgarea">
@@ -23,9 +27,6 @@
                             <div id="colorPicker"></div>
                             <div class="clear"></div>
                         </div>
-                        <div class="wrapcolor pl">
-                            <label><var id="lang_background_netimg"></var>:</label><input class="txt" type="text" id="url">
-                        </div>
                         <div id="alignment" class="alignment">
                             <var id="lang_background_align"></var>:<select id="repeatType">
                                 <option value="center"></option>
@@ -40,6 +41,13 @@
                         </div>
                     </div>
                 </fieldset>
+            </div>
+            <div id="imgManager" class="panel">
+                <div id="filePickerBtn">
+                    <var id="lang_background_select"></var>
+                    <input id="filePickerInput" type="file" />
+                </div>
+                <div id="imageList"></div>
             </div>
         </div>
     </div>

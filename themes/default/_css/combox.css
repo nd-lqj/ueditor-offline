@@ -1,6 +1,6 @@
 /*不可选中菜单按钮 */
 .edui-default .edui-toolbar .edui-combox-body .edui-button-body {
-    width: 67px;
+    width: 60px;
     font-size: 12px;
     height: 20px;
     line-height: 20px;
@@ -13,7 +13,7 @@
     background: url(../images/icons.png) -741px 0;
     _background: url(../images/icons.gif) -741px 0;
     height: 20px;
-    width: 12px;
+    width: 9px;
 }
 
 .edui-default .edui-toolbar .edui-combox .edui-combox-body {

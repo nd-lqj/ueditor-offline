@@ -25,7 +25,7 @@ UE.I18N['zh-cn'] = {
         'imageleft':'左浮动', 'imageright':'右浮动', 'attachment':'附件', 'imagecenter':'居中', 'wordimage':'图片转存',
         'lineheight':'行间距','edittip' :'编辑提示','customstyle':'自定义标题', 'autotypeset':'自动排版',
         'webapp':'百度应用','touppercase':'字母大写', 'tolowercase':'字母小写','background':'背景','template':'模板','scrawl':'涂鸦',
-        'music':'音乐','inserttable':'插入表格','drafts': '从草稿箱加载', 'charts': '图表', 'urlbase64': '选择图片'
+        'music':'音乐','inserttable':'插入表格','drafts': '从草稿箱加载', 'charts': '图表'
     },
     'insertorderedlist':{
         'num':'1,2,3...',
@@ -238,7 +238,8 @@ UE.I18N['zh-cn'] = {
     'background':{
         'static':{
             'lang_background_normal':'背景设置',
-            'lang_background_local':'在线图片',
+            'lang_background_local':'本地图片',
+            'lang_background_select':'选择图片',
             'lang_background_set':'选项',
             'lang_background_none':'无背景色',
             'lang_background_colored':'有背景色',
@@ -256,7 +257,7 @@ UE.I18N['zh-cn'] = {
     'insertimage':{
         'static':{
             'lang_tab_remote':"插入图片", //节点
-            'lang_tab_upload':"本地上传",
+            'lang_tab_upload':"本地图片",
             'lang_tab_online':"在线管理",
             'lang_tab_search':"图片搜索",
             'lang_input_url':"地 址：",

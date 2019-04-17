@@ -25,7 +25,7 @@ UE.I18N['en'] = {
         'imageleft':'ImageLeft', 'imageright':'ImageRight', 'attachment':'Attachment', 'imagecenter':'ImageCenter', 'wordimage':'WordImage',
         'lineheight':'LineHeight','edittip':'EditTip','customstyle':'CustomStyle', 'scrawl':'Scrawl', 'autotypeset':'AutoTypeset',
         'webapp':'WebAPP', 'touppercase':'UpperCase', 'tolowercase':'LowerCase','template':'Template','background':'Background','inserttable':'InsertTable',
-        'music':'Music', 'charts': 'charts','drafts': 'Load from Drafts', 'urlbase64': 'Select Image'
+        'music':'Music', 'charts': 'charts','drafts': 'Load from Drafts'
     },
     'insertorderedlist':{
         'num':'1,2,3...',
@@ -239,7 +239,8 @@ UE.I18N['en'] = {
     'background':{
         'static':{
             'lang_background_normal':'Normal',
-            'lang_background_local':'Online',
+            'lang_background_local':'Local',
+            'lang_background_select':'Select',
             'lang_background_set':'Background Set',
             'lang_background_none':'No Background',
             'lang_background_colored':'Colored Background',
