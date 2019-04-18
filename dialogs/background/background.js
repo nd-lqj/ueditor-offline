@@ -34,6 +34,7 @@
         var obj = editor.queryCommandValue('background');
         if (obj) {
             var color = obj['background-color'],
+                stretch = obj['background-size'] || 'no',
                 repeat = obj['background-repeat'] || 'repeat',
                 image = obj['background-image'] || '',
                 position = obj['background-position'] || 'center center',
@@ -42,7 +43,7 @@
                 y = parseInt(pos[1]) || 0;
 
             if(repeat == 'no-repeat' && (x || y)) repeat = 'self';
-            updateFormState('colored', color, image, repeat, x, y);
+            updateFormState('colored', color, image, stretch, repeat, x, y);
         } else {
             updateFormState();
         }
@@ -53,6 +54,7 @@
         }
         domUtils.on($G('nocolorRadio'), 'click', updateBackground);
         domUtils.on($G('coloredRadio'), 'click', updateHandler);
+        domUtils.on($G('stretchType'), 'change', updateHandler);
         domUtils.on($G('repeatType'), 'change', updateHandler);
         domUtils.on($G('x'), 'keyup', updateBackground);
         domUtils.on($G('y'), 'keyup', updateBackground);
@@ -100,7 +102,7 @@
     }
 
     /* 更新背景色设置面板 */
-    function updateFormState (radio, color, url, align, x, y) {
+    function updateFormState (radio, color, url, stretch, align, x, y) {
         var nocolorRadio = $G('nocolorRadio'),
             coloredRadio = $G('coloredRadio');
 
@@ -115,7 +117,11 @@
         if (url) {
             onlineImage.bgimgSelected = url;
         }
-
+        if(stretch) {
+            utils.each($G('stretchType').children, function(item){
+                item.selected = (stretch == item.getAttribute('value') ? 'selected':false);
+            });
+        }
         if(align) {
             utils.each($G('repeatType').children, function(item){
                 item.selected = (align == item.getAttribute('value') ? 'selected':false);
@@ -131,27 +137,36 @@
 
     /* 更新背景颜色 */
     function updateBackground () {
-        if ($G('coloredRadio').checked) {
-            var color = domUtils.getStyle($G("colorPicker"), "background-color"),
-                bgimg = onlineImage.bgimgSelected,
-                align = $G("repeatType").value,
-                backgroundObj = {
-                    "background-repeat": "no-repeat",
-                    "background-position": "center center"
-                };
-
-            if (color) backgroundObj["background-color"] = color;
-            if (bgimg) backgroundObj["background-image"] = 'url(' + bgimg + ')';
-            if (align == 'self') {
+        var backgroundObj = null;
+        var bgimg = onlineImage.bgimgSelected;
+        var color = domUtils.getStyle($G("colorPicker"), "background-color");
+        var stretch = $G("stretchType").value;
+        var align = $G("repeatType").value;
+        if ($G('coloredRadio').checked && color) {
+            backgroundObj = {};
+            backgroundObj["background-color"] = color;
+        }
+        if (bgimg) {
+            if (!backgroundObj) {
+                backgroundObj = {};
+            }
+            backgroundObj["background-image"] = 'url(' + bgimg + ')';
+        }
+        if (backgroundObj) {
+            backgroundObj["background-repeat"] = "no-repeat";
+            backgroundObj["background-position"] = "center center";
+            if (stretch === 'horizontal') {
+                backgroundObj["background-size"] = "100% auto";
+            } else if (stretch === 'vertica') {
+                backgroundObj["background-size"] = "auto 100%";
+            }
+            if (align === 'self') {
                 backgroundObj["background-position"] = $G("x").value + "px " + $G("y").value + "px";
             } else if (align == 'repeat-x' || align == 'repeat-y' || align == 'repeat') {
                 backgroundObj["background-repeat"] = align;
             }
-
-            editor.execCommand('background', backgroundObj);
-        } else {
-            editor.execCommand('background', null);
         }
+        editor.execCommand('background', backgroundObj);
     }
 
 
@@ -220,30 +235,17 @@
                     nodes = $G('imageListUl').childNodes;
 
                 if (li.tagName.toLowerCase() == 'li') {
+                    var bgimg = '';
                     for (var i = 0, node; node = nodes[i++];) {
                         if (node == li && !domUtils.hasClass(node, 'selected')) {
                             domUtils.addClass(node, 'selected');
+                            bgimg = li.firstChild.getAttribute("src");
                         } else {
                             domUtils.removeClasses(node, 'selected');
                         }
                     }
-                    
-                    var color = domUtils.getStyle($G("colorPicker"), "background-color"),
-                    bgimg = li.firstChild.getAttribute("src"),
-                    align = $G("repeatType").value,
-                    backgroundObj = {
-                        "background-repeat": "no-repeat",
-                        "background-position": "center center"
-                    };
                     onlineImage.bgimgSelected = bgimg;
-                    if (color) backgroundObj["background-color"] = color;
-                    if (bgimg) backgroundObj["background-image"] = 'url(' + bgimg + ')';
-                    if (align == 'self') {
-                        backgroundObj["background-position"] = $G("x").value + "px " + $G("y").value + "px";
-                    } else if (align == 'repeat-x' || align == 'repeat-y' || align == 'repeat') {
-                        backgroundObj["background-repeat"] = align;
-                    }
-                    editor.execCommand('background', backgroundObj);
+                    updateBackground();
                 }
             });
         },

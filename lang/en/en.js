@@ -247,8 +247,10 @@ UE.I18N['en'] = {
             'lang_background_color':'Color Set',
             'lang_background_netimg':'Net-Image',
             'lang_background_align':'Align Type',
+            'lang_background_stretch': 'Stretch Type',
             'lang_background_position':'Position',
-            'repeatType':{'options':["Center", "Repeat-x", "Repeat-y", "Tile","Custom"]}
+            'repeatType':{'options':["Center", "Repeat-x", "Repeat-y", "Tile","Custom"]},
+            'stretchType':{'options':["none", "Horizontal", "Vertica"]}
         },
         'noUploadImage':"No pictures has been uploaded！",
         'toggleSelect':'Change the active state by click!\n Image Size: '

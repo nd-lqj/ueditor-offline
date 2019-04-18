@@ -434,10 +434,12 @@
           "<head>" +
           "<style type='text/css'>" +
           //设置四周的留边
-          ".view{padding:0;word-wrap:break-word;cursor:text;height:90%;}\n" +
+          ".view{padding:0;margin:0;word-wrap:break-word;cursor:text;height:100%;}\n" +
           //设置默认字体和字号
           //font-family不能呢随便改，在safari下fillchar会有解析问题
-          "body{margin:8px;font-family:sans-serif;font-size:16px;}" +
+          "body{margin:0px;font-family:sans-serif;font-size:16px;}" +
+          //清除浮动，body上清除浮动因为内部的P标签的margin影响到body的位置了。
+          ".clearfix:before,.clearfix:after {content:'';display:table;}\n.clearfix:after { clear:both; }" +
           //设置段落间距
           "p{margin:5px 0;}</style>" +
           (options.iframeCssUrl
@@ -449,7 +451,7 @@
             ? "<style>" + options.initialStyle + "</style>"
             : "") +
           "</head>" +
-          "<body class='view' ></body>" +
+          "<body class='view clearfix' ></body>" +
           "<script type='text/javascript' " +
           (ie ? "defer='defer'" : "") +
           " id='_initialScript'>" +
@@ -822,7 +824,7 @@
         });
       }
       return (
-        "<html><head>" +
+        "<html xmlns='http://www.w3.org/1999/xhtml' class='view'><head>" +
         (me.options.charset
           ? '<meta http-equiv="Content-Type" content="text/html; charset=' +
               me.options.charset +
@@ -832,9 +834,7 @@
           me.document.getElementsByTagName("head")[0].innerHTML) +
         headHtml.join("\n") +
         "</head>" +
-        "<body " +
-        (ie && browser.version < 9 ? 'class="view"' : "") +
-        ">" +
+        "<body class='view clearfix'>" +
         me.getContent(null, null, true) +
         "</body></html>"
       );

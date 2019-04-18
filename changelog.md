@@ -1,14 +1,17 @@
 #UEditor Change List
 
-1、image.html/image.js删除在线图片、搜索图片功能，并修改上传图片功能为转换base64
-2、Gruntfile.js删除对disDir变量的修改。所有文件直接放到dist目录下面
-3、Editor.js注释掉 尝试异步加载后台配置
-4、defaultfilter.js 删除对base64img的过滤
-5、simpleupload.js 删除判断后端配置是否没有加载成功，并需改上传图片功能为转换base64
-6、zh-cn.js 修改lang_background_local和lang_tab_upload为“本地图片”
-7、en.js 修改lang_background_local为“Local”
-8、zh-cn.js/en.js 添加lang_background_select
-9、background.html/background.js删除在线图片、搜索图片功能，并修改上传图片功能为转换base64
+
+##1.5.1
+###阉割后台关联，图片转BASE64
++ 1、image.html/image.js删除在线图片、搜索图片功能，并修改上传图片功能为转换base64
++ 2、Gruntfile.js删除对disDir变量的修改。所有文件直接放到dist目录下面
++ 3、Editor.js注释掉 尝试异步加载后台配置
++ 4、defaultfilter.js 删除对base64img的过滤
++ 5、simpleupload.js 删除判断后端配置是否没有加载成功，并需改上传图片功能为转换base64
++ 6、zh-cn.js 修改lang_background_local和lang_tab_upload为“本地图片”
++ 7、en.js 修改lang_background_local为“Local”
++ 8、zh-cn.js/en.js 添加lang_background_select
++ 9、background.html/background.js删除在线图片、搜索图片功能，并修改上传图片功能为转换base64
 
 
 ##1.5.0

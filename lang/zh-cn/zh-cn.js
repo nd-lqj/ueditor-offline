@@ -246,8 +246,10 @@ UE.I18N['zh-cn'] = {
             'lang_background_color':'颜色设置',
             'lang_background_netimg':'网络图片',
             'lang_background_align':'对齐方式',
+            'lang_background_stretch':'拉伸方向',
             'lang_background_position':'精确定位',
-            'repeatType':{'options':["居中", "横向重复", "纵向重复", "平铺","自定义"]}
+            'repeatType':{'options':["居中", "横向重复", "纵向重复", "平铺","自定义"]},
+            'stretchType':{'options':["不拉伸", "横向拉伸", "纵向拉伸"]}
 
         },
         'noUploadImage':"当前未上传过任何图片！",
