@@ -434,7 +434,7 @@
           "<head>" +
           "<style type='text/css'>" +
           //设置四周的留边
-          ".view{padding:0;margin:0;word-wrap:break-word;cursor:text;min-height:100%;}\n" +
+          ".view{padding:0;margin:0;word-wrap:break-word;cursor:text;height:100%;}\n" +
           //设置默认字体和字号
           //font-family不能呢随便改，在safari下fillchar会有解析问题
           "body{margin:0px;font-family:sans-serif;font-size:16px;}" +
