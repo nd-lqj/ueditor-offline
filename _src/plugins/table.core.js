@@ -208,7 +208,7 @@
 
   UETable.prototype = {
     getMaxRows: function() {
-      var rows = this.table.rows,
+      var rows = this.table.rows || [],
         maxLen = 1;
       for (var i = 0, row; (row = rows[i]); i++) {
         var currentMax = 1;
@@ -223,7 +223,7 @@
          * 获取当前表格的最大列数
          */
     getMaxCols: function() {
-      var rows = this.table.rows,
+      var rows = this.table.rows || [],
         maxLen = 0,
         cellRows = {};
       for (var i = 0, row; (row = rows[i]); i++) {
@@ -347,7 +347,7 @@
           end =
             domUtils.getXY(cell)[flag ? "x" : "y"] +
             cell["offset" + (flag ? "Width" : "Height")],
-          rows = this.table.rows,
+          rows = this.table.rows || [],
           cells = null,
           returns = [];
         for (var i = 0; i < this.rowsNum; i++) {
@@ -410,7 +410,7 @@
       this.selectedTds = [];
       this.cellsRange = {};
       this.indexTable = [];
-      var rows = this.table.rows,
+      var rows = this.table.rows || [],
         rowsNum = this.getMaxRows(),
         dNum = rowsNum - rows.length,
         colsNum = this.getMaxCols();
@@ -496,7 +496,7 @@
         };
       }
       //给第一行设置firstRow的样式名称,在排序图标的样式上使用到
-      if (!domUtils.hasClass(this.table.rows[0], "firstRow")) {
+      if (this.table.rows && this.table.rows.length > 0 && !domUtils.hasClass(this.table.rows[0], "firstRow")) {
         domUtils.addClass(this.table.rows[0], "firstRow");
         for (var i = 1; i < this.table.rows.length; i++) {
           domUtils.removeClasses(this.table.rows[i], "firstRow");
@@ -1148,7 +1148,7 @@
     },
     deleteCol: function(colIndex) {
       var indexTable = this.indexTable,
-        tableRows = this.table.rows,
+        tableRows = this.table.rows || [],
         backTableWidth = this.table.getAttribute("width"),
         backTdWidth = 0,
         rowsNum = this.rowsNum,
