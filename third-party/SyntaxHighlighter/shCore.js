@@ -1584,7 +1584,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
      */
     function trim(str)
     {
-        return str.replace(/^\s+|\s+$/g, '');
+        return str.replace(/(^\s*)|(\s*$)/g, '');
     };
 
     /**
@@ -2343,7 +2343,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
         getKeywords: function(str)
         {
             str = str
-                .replace(/^\s+|\s+$/g, '')
+                .replace(/(^\s*)|(\s*$)/g, '')
                 .replace(/\s+/g, '|')
             ;
 

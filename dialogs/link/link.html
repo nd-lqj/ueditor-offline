@@ -31,15 +31,8 @@
                  <input id="target" type="checkbox"/>
              </td>
         </tr>
-        <tr>
-            <td colspan="2" id="msg"></td>
-        </tr>
     </table>
 <script type="text/javascript">
-
-    editor.setOpt('allowLinkProtocols', ['http:', 'https:', '#', '/', 'ftp:', 'mailto:', 'tel:']);
-    var allowLinkProtocols = editor.getOpt('allowLinkProtocols');
-
     var range = editor.selection.getRange(),
         link = range.collapsed ? editor.queryCommandValue( "link" ) : editor.selection.getStart(),
         url,
@@ -76,15 +69,12 @@
     $focus($G("href"));
 
     function handleDialogOk(){
-        var href =$G('href').value.replace(/^\s+|\s+$/g, '');
+        var href =$G('href').value.replace(/(^\s*)|(\s*$)/g, '');
         if(href){
-            if(!hrefStartWith(href, allowLinkProtocols)) {
-                href  = "http://" + href;
-            }
             var obj = {
                 'href' : href,
                 'target' : $G("target").checked ? "_blank" : '_self',
-                'title' : $G("title").value.replace(/^\s+|\s+$/g, ''),
+                'title' : $G("title").value.replace(/(^\s*)|(\s*$)/g, ''),
                 '_href':href
             };
             //修改链接内容的情况太特殊了，所以先做到这里了
@@ -108,16 +98,9 @@
             return false;
         }
     };
-    $G('href').onblur = function(){
-        if(!hrefStartWith(this.value, allowLinkProtocols)){
-            $G("msg").innerHTML = "<span style='color: red'>"+lang.httpPrompt+"</span>";
-        }else{
-            $G("msg").innerHTML = "";
-        }
-    };
 
     function hrefStartWith(href,arr){
-        href = href.replace(/^\s+|\s+$/g, '');
+        href = href.replace(/(^\s*)|(\s*$)/g, '');
         for(var i=0,ai;ai=arr[i++];){
             if(href.indexOf(ai)==0){
                 return true;

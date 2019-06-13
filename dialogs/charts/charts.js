@@ -476,7 +476,7 @@ function getCellValue ( cell ) {
 
     var value = utils.trim( ( cell.innerText || cell.textContent || '' ) );
 
-    return value.replace( new RegExp( UE.dom.domUtils.fillChar, 'g' ), '' ).replace( /^\s+|\s+$/g, '' );
+    return value.replace( new RegExp( UE.dom.domUtils.fillChar, 'g' ), '' ).replace( /(^\s*)|(\s*$)/g, '' );
 
 }
 

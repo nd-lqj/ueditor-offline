@@ -1837,7 +1837,7 @@ UserAction = {
                         return false;
                 }
                 else {
-                    if (nodeA.getAttr(p).toLowerCase().replace(/^\s+|\s+$/g, "") != nodeB.getAttr(p).toLowerCase().replace(/^\s+|\s+$/g, ""))
+                    if (nodeA.getAttr(p).toLowerCase().replace(/(^\s*)|(\s*$)/g, "") != nodeB.getAttr(p).toLowerCase().replace(/(^\s*)|(\s*$)/g, ""))
                         return false;
                 }
             }

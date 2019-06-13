@@ -333,7 +333,7 @@
 	 * Trim a string from whitespace
 	 */
 	trim: function (str) {
-		return typeof str === 'string' ? str.replace(/^\s+|\s+$/g, '') : str;
+		return typeof str === 'string' ? str.replace(/(^\s*)|(\s*$)/g, '') : str;
 	},
 	
 	/**

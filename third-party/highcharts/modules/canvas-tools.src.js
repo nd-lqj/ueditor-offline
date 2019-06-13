@@ -419,7 +419,7 @@ if(!Array.prototype.indexOf){
 		}
 
 		// trim
-		svg.trim = function(s) { return s.replace(/^\s+|\s+$/g, ''); }
+		svg.trim = function(s) { return s.replace(/(^\s*)|(\s*$)/g, ''); }
 		
 		// compress spaces
 		svg.compressSpaces = function(s) { return s.replace(/[\s\r\t\n]+/gm,' '); }

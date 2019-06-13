@@ -113,7 +113,7 @@ UE.plugin.register("charts", function() {
 
         value = value
           .replace(new RegExp(UE.dom.domUtils.fillChar, "g"), "")
-          .replace(/^\s+|\s+$/g, "");
+          .replace(/(^\s*)|(\s*$)/g, "");
 
         //必须是数字
         if (!/^\d*\.?\d+$/.test(value)) {

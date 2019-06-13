@@ -151,7 +151,7 @@
               setClass += " " + classNames[c];
             }
           }
-          element.className = setClass.replace(/^\s+|\s+$/g, "");
+          element.className = setClass.replace(/(^\s*)|(\s*$)/g, "");
         }
       }
     }
@@ -175,7 +175,7 @@
           for (var c = 0, cl = classNames.length; c < cl; c++) {
             className = className.replace(" " + classNames[c] + " ", " ");
           }
-          element.className = className.replace(/^\s+|\s+$/g, "");
+          element.className = className.replace(/(^\s*)|(\s*$)/g, "");
         } else {
           element.className = "";
         }
@@ -335,7 +335,7 @@
     if (originOrUrl == null || originOrUrl === "") {
       return null;
     }
-    originOrUrl = originOrUrl.replace(/^\s+|\s+$/g, "");
+    originOrUrl = originOrUrl.replace(/(^\s*)|(\s*$)/g, "");
     if (originOrUrl === "") {
       return null;
     }
