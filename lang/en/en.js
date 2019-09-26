@@ -19,33 +19,13 @@ UE.I18N['en'] = {
         'fontfamily':'FontFamily', 'fontsize':'FontSize', 'paragraph':'Paragraph','simpleupload':'Single Image','insertimage':'Multi Image','edittable':'Edit Table', 'edittd':'Edit Td','link':'Link',
         'emotion':'Emotion', 'spechars':'Spechars', 'searchreplace':'SearchReplace', 'map':'BaiduMap', 'gmap':'GoogleMap',
         'insertvideo':'Video', 'help':'Help', 'justifyleft':'JustifyLeft', 'justifyright':'JustifyRight', 'justifycenter':'JustifyCenter',
-        'justifyjustify':'Justify', 'forecolor':'FontColor', 'backcolor':'BackColor', 'insertorderedlist':'OL',
-        'insertunorderedlist':'UL', 'fullscreen':'FullScreen', 'directionalityltr':'EnterFromLeft', 'directionalityrtl':'EnterFromRight',
+        'justifyjustify':'Justify', 'forecolor':'FontColor', 'backcolor':'BackColor',
+        'fullscreen':'FullScreen', 'directionalityltr':'EnterFromLeft', 'directionalityrtl':'EnterFromRight',
         'rowspacingtop':'RowSpacingTop', 'rowspacingbottom':'RowSpacingBottom', 'pagebreak':'PageBreak', 'insertframe':'Iframe', 'imagenone':'Default',
         'imageleft':'ImageLeft', 'imageright':'ImageRight', 'attachment':'Attachment', 'imagecenter':'ImageCenter', 'wordimage':'WordImage',
         'lineheight':'LineHeight','edittip':'EditTip','customstyle':'CustomStyle', 'scrawl':'Scrawl', 'autotypeset':'AutoTypeset',
         'webapp':'WebAPP', 'touppercase':'UpperCase', 'tolowercase':'LowerCase','template':'Template','background':'Background','inserttable':'InsertTable',
         'music':'Music', 'charts': 'charts','drafts': 'Load from Drafts'
-    },
-    'insertorderedlist':{
-        'num':'1,2,3...',
-        'num1':'1),2),3)...',
-        'num2':'(1),(2),(3)...',
-        'cn':'一,二,三....',
-        'cn1':'一),二),三)....',
-        'cn2':'(一),(二),(三)....',
-        'decimal':'1,2,3...',
-        'lower-alpha':'a,b,c...',
-        'lower-roman':'i,ii,iii...',
-        'upper-alpha':'A,B,C...',
-        'upper-roman':'I,II,III...'
-    },
-    'insertunorderedlist':{
-        'circle':'○ Circle',
-        'disc':'● Circle dot',
-        'square':'■ Rectangle ',
-        'dash' :'－ Dash',
-        'dot' : '。dot'
     },
     'paragraph':{'p':'Paragraph', 'h1':'Title 1', 'h2':'Title 2', 'h3':'Title 3', 'h4':'Title 4', 'h5':'Title 5', 'h6':'Title 6'},
     'fontfamily':{

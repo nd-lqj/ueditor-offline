@@ -65,20 +65,15 @@
     padding: 0;
 }
 
-.edui-default .edui-for-insertorderedlist .edui-bordereraser,
 .edui-default .edui-for-lineheight .edui-bordereraser,
 .edui-default .edui-for-rowspacingtop .edui-bordereraser,
-.edui-default .edui-for-rowspacingbottom .edui-bordereraser,
-.edui-default .edui-for-insertunorderedlist .edui-bordereraser {
+.edui-default .edui-for-rowspacingbottom .edui-bordereraser {
     background-color: white;
 }
 
 /* 解决嵌套导致的图标问题 */
-.edui-default .edui-for-insertorderedlist .edui-popup-body .edui-icon,
 .edui-default .edui-for-lineheight .edui-popup-body .edui-icon,
 .edui-default .edui-for-rowspacingtop .edui-popup-body .edui-icon,
-.edui-default .edui-for-rowspacingbottom .edui-popup-body .edui-icon,
-.edui-default .edui-for-insertunorderedlist .edui-popup-body .edui-icon {
-    /*background-position: 0 -40px;*/
+.edui-default .edui-for-rowspacingbottom .edui-popup-body .edui-icon {
     background-image: none  ;
 }

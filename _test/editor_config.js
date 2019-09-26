@@ -75,8 +75,6 @@ var UEDITOR_CONFIG2 = {
         'justifyjustify':'两端对齐',
         'forecolor' : '字体颜色',
         'backcolor' : '背景色',
-        'insertorderedlist' : '有序列表',
-        'insertunorderedlist' : '无序列表',
         'fullscreen' : '全屏',
         'directionalityltr' : '从左向右输入',
         'directionalityrtl' : '从右向左输入',

@@ -54,8 +54,6 @@
         "|",
         "forecolor",
         "backcolor",
-        "insertorderedlist",
-        "insertunorderedlist",
         "selectall",
         "cleardoc",
         "|",
@@ -239,33 +237,6 @@
 
     //,allHtmlEnabled:false //提交到后台的数据是否包含整个html字符串
 
-    //insertorderedlist
-    //有序列表的下拉配置,值留空时支持多语言自动识别，若配置值，则以此值为准
-    //,'insertorderedlist':{
-    //      //自定的样式
-    //        'num':'1,2,3...',
-    //        'num1':'1),2),3)...',
-    //        'num2':'(1),(2),(3)...',
-    //        'cn':'一,二,三....',
-    //        'cn1':'一),二),三)....',
-    //        'cn2':'(一),(二),(三)....',
-    //     //系统自带
-    //     'decimal' : '' ,         //'1,2,3...'
-    //     'lower-alpha' : '' ,    // 'a,b,c...'
-    //     'lower-roman' : '' ,    //'i,ii,iii...'
-    //     'upper-alpha' : '' , lang   //'A,B,C'
-    //     'upper-roman' : ''      //'I,II,III...'
-    //}
-
-    //insertunorderedlist
-    //无序列表的下拉配置，值留空时支持多语言自动识别，若配置值，则以此值为准
-    //,insertunorderedlist : { //自定的样式
-    //    'dash' :'— 破折号', //-破折号
-    //    'dot':' 。 小圆圈', //系统自带
-    //    'circle' : '',  // '○ 小圆圈'
-    //    'disc' : '',    // '● 小圆点'
-    //    'square' : ''   //'■ 小方块'
-    //}
     //,listDefaultPaddingLeft : '30'//默认的左边缩进的基数倍
     //,listiconpath : 'http://bs.baidu.com/listicon/'//自定义标号的路径
     //,maxListLevel : 3 //限制可以tab的级数, 设置-1为不限制
@@ -340,7 +311,7 @@
     //]
 
     //快捷菜单
-    //,shortcutMenu:["fontfamily", "fontsize", "bold", "italic", "underline", "forecolor", "backcolor", "insertorderedlist", "insertunorderedlist"]
+    //,shortcutMenu:["fontfamily", "fontsize", "bold", "italic", "underline", "forecolor", "backcolor"]
 
     //elementPathEnabled
     //是否启用元素路径，默认是显示

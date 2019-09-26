@@ -57,7 +57,6 @@
             'plugins/copy.js',
             'plugins/paste.js',
             'plugins/puretxtpaste.js',
-            'plugins/list.js',
             'plugins/source.js',
             'plugins/enterkey.js',
             'plugins/keystrokes.js',

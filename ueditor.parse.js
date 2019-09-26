@@ -5,7 +5,6 @@
     'table.js',
     'charts.js',
     'background.js',
-    'list.js',
     'video.js'
   ];
 
