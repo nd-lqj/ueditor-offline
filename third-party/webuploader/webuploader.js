@@ -1605,7 +1605,7 @@
             container: null,
             label: null,
             innerHTML: null,
-            multiple: true,
+            multiple: false,
             accept: null,
             name: 'file'
         };
@@ -4358,6 +4358,7 @@
                     cursor: 'pointer',
                     background: '#ffffff'
                 });
+    
     
                 if ( opts.multiple ) {
                     input.attr( 'multiple', 'multiple' );
