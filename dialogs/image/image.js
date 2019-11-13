@@ -25,13 +25,13 @@
                 setTabFocus(target.getAttribute('data-content-id'));
             });
         }
-
-        var img = editor.selection.getRange().getClosedNode();
-        if (img && img.tagName && img.tagName.toLowerCase() == 'img') {
-            setTabFocus('remote');
-        } else {
-            setTabFocus('upload');
-        }
+        setTabFocus('remote');
+        // var img = editor.selection.getRange().getClosedNode();
+        // if (img && img.tagName && img.tagName.toLowerCase() == 'img') {
+        //     setTabFocus('remote');
+        // } else {
+        //     setTabFocus('upload');
+        // }
     }
 
     /* 初始化tabbody */
@@ -51,6 +51,7 @@
         switch (id) {
             case 'remote':
                 remoteImage = remoteImage || new RemoteImage();
+                uploadImage = uploadImage || new UploadImage('queueList');
                 break;
             case 'upload':
                 setAlign(editor.getOpt('imageInsertAlign'));
@@ -73,7 +74,7 @@
 
             switch (id) {
                 case 'remote':
-                    list = remoteImage.getInsertList();
+                    list = uploadImage.getQueueList();
                     break;
                 case 'upload':
                     list = uploadImage.getQueueList();
@@ -130,7 +131,7 @@
         },
         initContainer: function () {
             this.dom = {
-                'url': $G('url'),
+                'url': $G('upload'),
                 'width': $G('width'),
                 'height': $G('height'),
                 'border': $G('border'),
@@ -148,7 +149,7 @@
                 locker = $G('lock');
 
             /* 改变url */
-            domUtils.on($G("url"), 'keyup', updatePreview);
+            domUtils.on($G("upload"), 'keyup', updatePreview);
             domUtils.on($G("border"), 'keyup', updatePreview);
             domUtils.on($G("title"), 'keyup', updatePreview);
 
@@ -201,7 +202,7 @@
                 align = editor.queryCommandValue("imageFloat");
 
             /* 防止onchange事件循环调用 */
-            if (src !== $G("url").value) $G("url").value = src;
+            if (src !== $G("upload").value) $G("upload").value = src;
             if(src) {
                 /* 设置表单内容 */
                 $G("width").value = img.width || '';
@@ -222,7 +223,7 @@
             return data;
         },
         setPreview: function(){
-            var url = $G('url').value,
+            var url = $G('upload').value,
                 ow = $G('width').value,
                 oh = $G('height').value,
                 border = $G('border').value,
@@ -241,10 +242,10 @@
         },
         getInsertList: function () {
             var data = this.getData();
-            if(data['url']) {
+            if(data['upload']) {
                 return [{
-                    src: data['url'],
-                    _src: data['url'],
+                    src: data['upload'],
+                    _src: data['upload'],
                     width: data['width'] || '',
                     height: data['height'] || '',
                     border: data['border'] || '',
@@ -274,7 +275,7 @@
             this.initUploader();
         },
         initContainer: function () {
-            this.$queue = this.$wrap.find('.filelist');
+            this.$queue = this.$wrap.find('#preview');
         },
         /* 初始化容器 */
         initUploader: function () {
@@ -282,7 +283,7 @@
                 $ = jQuery,    // just in case. Make sure it's not an other libaray.
                 $wrap = _this.$wrap,
             // 图片容器
-                $queue = $wrap.find('.filelist'),
+                $queue = $wrap.find('#preview'),
             // 状态栏，包括进度和控制按钮
                 $statusBar = $wrap.find('.statusBar'),
             // 文件总体选择信息。
@@ -336,14 +337,14 @@
             uploader = _this.uploader = WebUploader.create({
                 pick: {
                     id: '#filePickerReady',
-                    label: lang.uploadSelectFile
+                    label: lang.uploadSelectFile // 点击上传图片
                 },
                 accept: {
                     title: 'Images',
                     extensions: acceptExtensions,
                     mimeTypes: 'image/*'
                 },
-                swf: '../../third-party/webuploader/Uploader.swf',
+                // swf: '../../third-party/webuploader/Uploader.swf',
                 server: actionUrl,
                 fileVal: editor.getOpt('imageFieldName'),
                 duplicate: true,
@@ -361,28 +362,29 @@
                     preserveHeaders: true
                 }:false
             });
-            uploader.addButton({
-                id: '#filePickerBlock'
-            });
-            uploader.addButton({
-                id: '#filePickerBtn',
-                label: lang.uploadAddFile
-            });
+            // uploader.addButton({
+            //     id: '#preview'
+            // });
+            // uploader.addButton({
+            //     id: '#filePickerBtn',
+            //     label: lang.uploadAddFile
+            // });
 
             setState('pedding');
 
             // 当有文件添加进来时执行，负责view的创建
             function addFile(file) {
-                var $li = $('<li id="' + file.id + '">' +
+                debugger;
+                var $li = $('<div id="' + 'uploadImage' + '">' +
                     '<p class="title">' + file.name + '</p>' +
                     '<p class="imgWrap"></p>' +
                     '<p class="progress"><span></span></p>' +
-                    '</li>'),
+                    '</div>'),
 
-                    $btns = $('<div class="file-panel">' +
-                    '<span class="cancel">' + lang.uploadDelete + '</span>' +
-                    '<span class="rotateRight">' + lang.uploadTurnRight + '</span>' +
-                    '<span class="rotateLeft">' + lang.uploadTurnLeft + '</span></div>').appendTo($li),
+                    // $btns = $('<div class="file-panel">' +
+                    // '<span class="cancel">' + lang.uploadDelete + '</span>' +
+                    // '<span class="rotateRight">' + lang.uploadTurnRight + '</span>' +
+                    // '<span class="rotateLeft">' + lang.uploadTurnLeft + '</span></div>').appendTo($li),
                     $prgress = $li.find('p.progress span'),
                     $wrap = $li.find('p.imgWrap'),
                     $info = $('<p class="error"></p>').hide().appendTo($li),
@@ -427,13 +429,13 @@
                             }
                         }, thumbnailWidth, thumbnailHeight);
                     }
-                    percentages[ file.id ] = [ file.size, 0 ];
+                    percentages[ 'uploadImage' ] = [ file.size, 0 ];
                     file.rotation = 0;
 
                     /* 检查文件格式 */
                     if (!file.ext || acceptExtensions.indexOf(file.ext.toLowerCase()) == -1) {
                         showError('not_allow_type');
-                        uploader.removeFile(file);
+                        uploader.removeFile();
                     }
                 }
 
@@ -447,11 +449,11 @@
                     // 成功
                     if (cur === 'error' || cur === 'invalid') {
                         showError(file.statusText);
-                        percentages[ file.id ][ 1 ] = 1;
+                        percentages[ 'uploadImage' ][ 1 ] = 1;
                     } else if (cur === 'interrupt') {
                         showError('interrupt');
                     } else if (cur === 'queued') {
-                        percentages[ file.id ][ 1 ] = 0;
+                        percentages[ 'uploadImage' ][ 1 ] = 0;
                     } else if (cur === 'progress') {
                         $info.hide();
                         $prgress.css('display', 'block');
@@ -462,49 +464,50 @@
                 });
 
                 $li.on('mouseenter', function () {
-                    $btns.stop().animate({height: 30});
+                    // $btns.stop().animate({height: 30});
                 });
                 $li.on('mouseleave', function () {
-                    $btns.stop().animate({height: 0});
+                    // $btns.stop().animate({height: 0});
                 });
 
-                $btns.on('click', 'span', function () {
-                    var index = $(this).index(),
-                        deg;
+                // $btns.on('click', 'span', function () {
+                //     var index = $(this).index(),
+                //         deg;
 
-                    switch (index) {
-                        case 0:
-                            uploader.removeFile(file);
-                            return;
-                        case 1:
-                            file.rotation += 90;
-                            break;
-                        case 2:
-                            file.rotation -= 90;
-                            break;
-                    }
+                //     switch (index) {
+                //         case 0:
+                //             uploader.removeFile(file);
+                //             return;
+                //         case 1:
+                //             file.rotation += 90;
+                //             break;
+                //         case 2:
+                //             file.rotation -= 90;
+                //             break;
+                //     }
 
-                    if (supportTransition) {
-                        deg = 'rotate(' + file.rotation + 'deg)';
-                        $wrap.css({
-                            '-webkit-transform': deg,
-                            '-mos-transform': deg,
-                            '-o-transform': deg,
-                            'transform': deg
-                        });
-                    } else {
-                        $wrap.css('filter', 'progid:DXImageTransform.Microsoft.BasicImage(rotation=' + (~~((file.rotation / 90) % 4 + 4) % 4) + ')');
-                    }
+                //     if (supportTransition) {
+                //         deg = 'rotate(' + file.rotation + 'deg)';
+                //         $wrap.css({
+                //             '-webkit-transform': deg,
+                //             '-mos-transform': deg,
+                //             '-o-transform': deg,
+                //             'transform': deg
+                //         });
+                //     } else {
+                //         $wrap.css('filter', 'progid:DXImageTransform.Microsoft.BasicImage(rotation=' + (~~((file.rotation / 90) % 4 + 4) % 4) + ')');
+                //     }
 
-                });
+                // });
 
-                $li.insertBefore($filePickerBlock);
+                //$li.insertBefore($filePickerBlock);
+                $("#preview").append($li);
             }
 
             // 负责view的销毁
-            function removeFile(file) {
-                var $li = $('#' + file.id);
-                delete percentages[ file.id ];
+            function removeFile() {
+                var $li = $('#uploadImage');
+                delete percentages['uploadImage'];
                 updateTotalProgress();
                 $li.off().find('.file-panel').off().end().remove();
             }
@@ -514,6 +517,7 @@
                     var reader = new FileReader();
                     reader.readAsDataURL(file.source.source);
                     reader.onload = function(e){
+                        _this.queueList = [];
                         _this.queueList.push({
                             src: this.result,
                             name: file.name,
@@ -523,13 +527,14 @@
                 }
             }
 
-            function dequeueFile(file) {
-                for (var i = 0; i < _this.queueList.length; i += 1) {
-                    if (_this.queueList[i].id === file.id) {
-                        _this.queueList.splice(i, 1);
-                        return;
-                    }
-                }
+            function dequeueFile() {
+                _this.queueList = [];
+                // for (var i = 0; i < _this.queueList.length; i += 1) {
+                //     if (_this.queueList[i].id === file.id) {
+                //         _this.queueList.splice(i, 1);
+                //         return;
+                //     }
+                // }
             }
 
             function updateTotalProgress() {
@@ -563,18 +568,18 @@
 
                         /* 未选择文件 */
                         case 'pedding':
-                            $queue.addClass('element-invisible');
-                            $statusBar.addClass('element-invisible');
-                            $placeHolder.removeClass('element-invisible');
+                            // $queue.addClass('element-invisible');
+                            // $statusBar.addClass('element-invisible');
+                            // $placeHolder.removeClass('element-invisible');
                             $progress.hide(); $info.hide();
                             uploader.refresh();
                             break;
 
                         /* 可以开始上传 */
                         case 'ready':
-                            $placeHolder.addClass('element-invisible');
-                            $queue.removeClass('element-invisible');
-                            $statusBar.removeClass('element-invisible');
+                            // $placeHolder.addClass('element-invisible');
+                            // $queue.removeClass('element-invisible');
+                            // $statusBar.removeClass('element-invisible');
                             $progress.hide(); $info.show();
                             $upload.text(lang.uploadStart);
                             uploader.refresh();
@@ -651,26 +656,29 @@
             }
 
             uploader.on('fileQueued', function (file) {
-                fileCount++;
-                fileSize += file.size;
+                debugger;
+                // fileCount++;
+                // fileSize += file.size;
 
-                if (fileCount === 1) {
-                    $placeHolder.addClass('element-invisible');
-                    $statusBar.show();
+                // if (fileCount === 1) {
+                //     // $placeHolder.addClass('element-invisible');
+                //     $statusBar.show();
+                // }
+                if (_this.queueList.length > 0) {
+                    removeFile();
                 }
-
                 addFile(file);
                 queueFile(file);
             });
 
             uploader.on('fileDequeued', function (file) {
-                if (file.ext && acceptExtensions.indexOf(file.ext.toLowerCase()) != -1 && file.size <= imageMaxSize) {
-                    fileCount--;
-                    fileSize -= file.size;
-                }
+                // if (file.ext && acceptExtensions.indexOf(file.ext.toLowerCase()) != -1 && file.size <= imageMaxSize) {
+                //     fileCount--;
+                //     fileSize -= file.size;
+                // }
 
-                removeFile(file);
-                dequeueFile(file);
+                removeFile();
+                dequeueFile();
                 updateTotalProgress();
             });
 
@@ -707,16 +715,16 @@
             });
 
             uploader.on('uploadProgress', function (file, percentage) {
-                var $li = $('#' + file.id),
+                var $li = $('#uploadImage'),
                     $percent = $li.find('.progress span');
 
                 $percent.css('width', percentage * 100 + '%');
-                percentages[ file.id ][ 1 ] = percentage;
+                percentages[ 'uploadImage' ][ 1 ] = percentage;
                 updateTotalProgress();
             });
 
             uploader.on('uploadSuccess', function (file, ret) {
-                var $file = $('#' + file.id);
+                var $file = $('#' + 'uploadImage');
                 try {
                     var responseText = (ret._raw || ret),
                         json = utils.str2json(responseText);
@@ -786,18 +794,15 @@
             return list;
         },
         getQueueList: function () {
-            var i, data, list = [],
+            var data,
                 align = getAlign();
-            for (i = 0; i < this.queueList.length; i++) {
-                data = this.queueList[i];
-                list.push({
-                    src: data.src,
-                    title: data.name,
-                    alt: data.name,
-                    floatStyle: align
-                });
-            }
-            return list;
+                data = this.queueList[0];
+            return [{
+                src: data.src,
+                title: data.name,
+                alt: data.name,
+                floatStyle: align
+            }];
         }
     };
 })();

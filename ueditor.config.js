@@ -87,7 +87,7 @@
         "imageright",
         "imagecenter",
         "|",
-        "simpleupload",
+        // "simpleupload", // 单张图片上传
         "insertimage",
         "emotion",
         "scrawl",

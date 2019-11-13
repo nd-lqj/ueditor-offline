@@ -16,6 +16,7 @@
 	text-align: center;
 	border-radius: 3px;
 	overflow: hidden;
+	margin: -10px 3px;
 }
 .webuploader-pick-hover {
 	background: #00a2d4;

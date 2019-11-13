@@ -243,6 +243,7 @@ UE.I18N['zh-cn'] = {
             'lang_tab_online':"在线管理",
             'lang_tab_search':"图片搜索",
             'lang_input_url':"地 址：",
+            'lang_upload_image':"上传图片：",
             'lang_input_size':"大 小：",
             'lang_input_width':"宽度",
             'lang_input_height':"高度",
@@ -526,6 +527,7 @@ UE.I18N['zh-cn'] = {
     'insertframe':{
         'static':{
             'lang_input_address':'地址：',
+            'lang_input_upload':'上传图片：',
             'lang_input_width':'宽度：',
             'lang_input_height':'高度：',
             'lang_input_isScroll':'允许滚动条：',

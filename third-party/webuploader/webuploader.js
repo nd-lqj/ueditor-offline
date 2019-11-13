@@ -931,7 +931,7 @@
                 });
     
                 parent.append( container );
-                parent.addClass('webuploader-container');
+                // parent.addClass('webuploader-container');
                 this._container = container;
                 return container;
             },
@@ -1617,7 +1617,9 @@
                 var me = this,
                     opts = me.options,
                     button = opts.button;
-    
+                if (opts.id === '#preview') {
+                    return;
+                }
                 button.addClass('webuploader-pick');
     
                 me.on( 'all', function( type ) {
@@ -1657,6 +1659,8 @@
             },
     
             refresh: function() {
+                console.log(this);
+                console.log(this.getRuntime());
                 var shimContainer = this.getRuntime().getContainer(),
                     button = this.options.button,
                     width = button.outerWidth ?
@@ -1678,8 +1682,8 @@
             enable: function() {
                 var btn = this.options.button;
     
-                btn.removeClass('webuploader-pick-disable');
-                this.refresh();
+                // btn.removeClass('webuploader-pick-disable');
+                // this.refresh();
             },
     
             disable: function() {
@@ -1689,7 +1693,7 @@
                     top: '-99999px'
                 });
     
-                btn.addClass('webuploader-pick-disable');
+                // btn.addClass('webuploader-pick-disable');
             },
     
             destroy: function() {
@@ -2730,13 +2734,12 @@
                 if ( !me.owner.trigger( 'beforeFileQueued', file ) ) {
                     return;
                 }
-    
                 // 类型不匹配，则派送错误事件，并返回。
-                if ( !me.acceptFile( file ) ) {
-                    me.owner.trigger( 'error', 'Q_TYPE_DENIED', file );
-                    return;
-                }
-    
+                // if ( !me.acceptFile( file ) ) {
+                //     me.owner.trigger( 'error', 'Q_TYPE_DENIED', file );
+                //     return;
+                // }
+                me.queue._queue = [];
                 me.queue.append( file );
                 me.owner.trigger( 'fileQueued', file );
                 return file;
@@ -2761,7 +2764,7 @@
              * @description 添加文件到队列
              * @for  Uploader
              */
-            addFiles: function( files ) {
+            addFiles: function( files ) { debugger;
                 var me = this;
     
                 if ( !files.length ) {
@@ -2803,13 +2806,13 @@
              *     uploader.removeFile( file );
              * })
              */
-            removeFile: function( file ) {
+            removeFile: function() {
                 var me = this;
     
-                file = file.id ? file : me.queue.getFile( file );
+                // file = file.id ? file : me.queue.getFile( file );
     
-                file.setStatus( Status.CANCELLED );
-                me.owner.trigger( 'fileDequeued', file );
+                // file.setStatus( Status.CANCELLED );
+                me.owner.trigger( 'fileDequeued');
             },
     
             /**
@@ -3794,7 +3797,6 @@
             }
     
             uploader.on( 'beforeFileQueued', function( file ) {
-    
                 if ( count >= max && flag ) {
                     flag = false;
                     this.trigger( 'error', 'Q_EXCEED_NUM_LIMIT', max, file );
@@ -4263,7 +4265,6 @@
         'runtime/html5/runtime',
         'lib/file'
     ], function( Base, Html5Runtime, File ) {
-    
         return Html5Runtime.register( 'FilePaste', {
             init: function() {
                 var opts = this.options,
@@ -6554,7 +6555,6 @@
     
             //     this.flashExec( 'Image', 'init', options );
             //     owner.on( 'load', function() {
-            //         debugger;
             //     });
             // },
     
