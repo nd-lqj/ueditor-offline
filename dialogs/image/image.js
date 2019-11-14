@@ -50,8 +50,8 @@
         }
         switch (id) {
             case 'remote':
-                remoteImage = remoteImage || new RemoteImage();
                 uploadImage = uploadImage || new UploadImage('queueList');
+                remoteImage = remoteImage || new RemoteImage();
                 break;
             case 'upload':
                 setAlign(editor.getOpt('imageInsertAlign'));
@@ -131,7 +131,7 @@
         },
         initContainer: function () {
             this.dom = {
-                'url': $G('upload'),
+                'url': $G('preview').getAttribute('data-img'),
                 'width': $G('width'),
                 'height': $G('height'),
                 'border': $G('border'),
@@ -193,7 +193,7 @@
                 locker.title = lang.remoteLockError;
             }
         },
-        setImage: function(img){
+        setImage: function(img){debugger;
             /* 不是正常的图片 */
             if (!img.tagName || img.tagName.toLowerCase() != 'img' && !img.getAttribute("src") || !img.src) return;
 
@@ -223,7 +223,25 @@
             return data;
         },
         setPreview: function(){
-            var url = $G('upload').value,
+            var url = $G('preview').value,
+                ow = $G('width').value,
+                oh = $G('height').value,
+                border = $G('border').value,
+                title = $G('title').value,
+                preview = $G('preview'),
+                width,
+                height;
+
+            width = ((!ow || !oh) ? preview.offsetWidth:Math.min(ow, preview.offsetWidth));
+            width = width+(border*2) > preview.offsetWidth ? width:(preview.offsetWidth - (border*2));
+            height = (!ow || !oh) ? '':width*oh/ow;
+
+            if(url) {
+                preview.innerHTML = '<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />';
+            }
+        },
+        setPreview2: function($dom){
+            var url = $dom.find('img').attr('src'),
                 ow = $G('width').value,
                 oh = $G('height').value,
                 border = $G('border').value,
@@ -374,19 +392,19 @@
 
             // 当有文件添加进来时执行，负责view的创建
             function addFile(file) {
-                debugger;
                 var $li = $('<div id="' + 'uploadImage' + '">' +
-                    '<p class="title">' + file.name + '</p>' +
-                    '<p class="imgWrap"></p>' +
-                    '<p class="progress"><span></span></p>' +
+                    // '<p class="title">' + file.name + '</p>' +
+                   // '<p class="imgWrap"></p>' +
+                    // '<p class="progress"><span></span></p>' +
                     '</div>'),
 
                     // $btns = $('<div class="file-panel">' +
                     // '<span class="cancel">' + lang.uploadDelete + '</span>' +
                     // '<span class="rotateRight">' + lang.uploadTurnRight + '</span>' +
-                    // '<span class="rotateLeft">' + lang.uploadTurnLeft + '</span></div>').appendTo($li),
+                    // '<span class="rotateLeft">' + lang.uploadTurnLeft + '</span><///div>').appendTo($li),
                     $prgress = $li.find('p.progress span'),
-                    $wrap = $li.find('p.imgWrap'),
+                   // $wrap = $li.find('p.imgWrap'),
+                   $wrap = $li,
                     $info = $('<p class="error"></p>').hide().appendTo($li),
 
                     showError = function (code) {
@@ -423,6 +441,8 @@
                             } else {
                                 var $img = $('<img src="' + src + '">');
                                 $wrap.empty().append($img);
+                                //remoteImage.setImage($img.get(0));
+                                remoteImage.setPreview2($li);
                                 $img.on('error', function () {
                                     $wrap.text(lang.uploadNoPreview);
                                 });
@@ -502,6 +522,7 @@
 
                 //$li.insertBefore($filePickerBlock);
                 $("#preview").append($li);
+                
             }
 
             // 负责view的销毁
@@ -656,7 +677,6 @@
             }
 
             uploader.on('fileQueued', function (file) {
-                debugger;
                 // fileCount++;
                 // fileSize += file.size;
 
