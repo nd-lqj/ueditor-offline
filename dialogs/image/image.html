@@ -9,7 +9,7 @@
     <script type="text/javascript" src="../../third-party/jquery-1.10.2.min.js"></script>
 
     <!-- webuploader -->
-    <script src="../../third-party/webuploader/webuploader.min.js"></script>
+    <script src="../../third-party/webuploader/webuploader.js"></script>
     <link rel="stylesheet" type="text/css" href="../../third-party/webuploader/webuploader.css">
 
     <!-- image dialog -->
@@ -19,8 +19,10 @@
 
     <div class="wrapper">
         <div id="tabhead" class="tabhead">
-            <span class="tab" data-content-id="remote"><var id="lang_tab_remote"></var></span>
-            <span class="tab focus" data-content-id="upload"><var id="lang_tab_upload"></var></span>
+            <!-- 插入图片 -->
+            <span class="tab focus" data-content-id="remote"><var id="lang_tab_remote"></var></span>
+            <!-- 本地图片 -->
+            <span class="tab " data-content-id="upload"><var id="lang_tab_upload"></var></span>
         </div>
         <div class="alignBar">
             <label class="algnLabel"><var id="lang_input_align"></var></label>
@@ -35,11 +37,22 @@
         <div id="tabbody" class="tabbody">
 
             <!-- 远程图片 -->
-            <div id="remote" class="panel">
+            <div id="remote" class="panel focus">
                 <div class="top">
                     <div class="row">
-                        <label for="url"><var id="lang_input_url"></var></label>
-                        <span><input class="text" id="url" type="text"/></span>
+                        <div style="display: flex;">
+                                <label><var id="lang_upload_image"></var></label>
+                                <!-- <span><input class="remote-element-invisible" id="upload" type="file" accept="image/*"/></span>
+                                <label class="remote_upload_btn">上传</label> -->
+                                <div id="dndArea" class="placeholder">
+                                    <div class="filePickerContainer">
+                                        <div id="filePickerReady"></div>
+                                    </div>
+                                </div>
+                                <ul class="filelist element-invisible">
+                                    <li id="filePickerBlock" class="filePickerBlock"></li>
+                                </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="left">
@@ -62,11 +75,17 @@
                         <span><input class="text" type="text" id="title"/></span>
                     </div>
                 </div>
-                <div class="right"><div id="preview"></div></div>
+                <div class="right"  id="queueList">
+                    <!-- <ul >
+                        <li id="filePickerBlock" class="filePickerBlock"></li>
+                    </ul> -->
+                    <div id="preview" class="filelist"></div>
+                    <div id="filePickerBlock" class="filePickerBlock"></div>
+                </div>
             </div>
 
             <!-- 上传图片 -->
-            <div id="upload" class="panel focus">
+            <div id="upload" class="panel">
                 <div id="queueList" class="queueList">
                     <div class="statusBar element-invisible">
                         <div class="progress">
