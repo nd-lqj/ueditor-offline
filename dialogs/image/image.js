@@ -193,7 +193,7 @@
                 locker.title = lang.remoteLockError;
             }
         },
-        setImage: function(img){debugger;
+        setImage: function(img){
             /* 不是正常的图片 */
             if (!img.tagName || img.tagName.toLowerCase() != 'img' && !img.getAttribute("src") || !img.src) return;
 
@@ -222,30 +222,30 @@
             }
             return data;
         },
-        setPreview: function(){
-            var url = $G('preview').value,
-                ow = $G('width').value,
-                oh = $G('height').value,
-                border = $G('border').value,
-                title = $G('title').value,
-                preview = $G('preview'),
-                width,
-                height;
+        // setPreview: function(){
+        //     var url = $G('preview').value,
+        //         ow = $G('width').value,
+        //         oh = $G('height').value,
+        //         border = $G('border').value,
+        //         title = $G('title').value,
+        //         preview = $G('preview'),
+        //         width,
+        //         height;
 
-            width = ((!ow || !oh) ? preview.offsetWidth:Math.min(ow, preview.offsetWidth));
-            width = width+(border*2) > preview.offsetWidth ? width:(preview.offsetWidth - (border*2));
-            height = (!ow || !oh) ? '':width*oh/ow;
+        //     width = ((!ow || !oh) ? preview.offsetWidth:Math.min(ow, preview.offsetWidth));
+        //     width = width+(border*2) > preview.offsetWidth ? width:(preview.offsetWidth - (border*2));
+        //     height = (!ow || !oh) ? '':width*oh/ow;
 
-            if(url) {
-                preview.innerHTML = '<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />';
-            }
-        },
-        setPreview2: function($dom){
-            var url = $dom.find('img').attr('src'),
-                ow = $G('width').value,
-                oh = $G('height').value,
-                border = $G('border').value,
-                title = $G('title').value,
+        //     if(url) {
+        //         preview.innerHTML = '<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />';
+        //     }
+        // },
+        setPreview: function(url){
+            var
+                ow = $G('width').value || '',
+                oh = $G('height').value || '',
+                border = $G('border').value || 0,
+                title = $G('title').value || '',
                 preview = $G('preview'),
                 width,
                 height;
@@ -259,6 +259,7 @@
             }
         },
         getInsertList: function () {
+            debugger;
             var data = this.getData();
             if(data['upload']) {
                 return [{
@@ -287,13 +288,30 @@
     }
     UploadImage.prototype = {
         init: function () {
-            this.imageList = [];
+            // this.imageList = [];
+            console.log(this.queueList);
+            debugger;
             this.queueList = [];
             this.initContainer();
             this.initUploader();
+            // this.initEvents();
         },
         initContainer: function () {
             this.$queue = this.$wrap.find('#preview');
+            this.dom = {
+                'width': $G('width'),
+                'height': $G('height'),
+                'border': $G('border'),
+                'vhSpace': $G('vhSpace'),
+                'title': $G('title'),
+                'align': $G('align')
+            };
+            var url = $G('preview').getAttribute('data-img');
+            debugger;
+            // 点击修改时，设置图片
+            if (url) {
+                this.setPreview(url);
+            }
         },
         /* 初始化容器 */
         initUploader: function () {
@@ -439,10 +457,10 @@
                             if (error || !src) {
                                 $wrap.text(lang.uploadNoPreview);
                             } else {
-                                var $img = $('<img src="' + src + '">');
-                                $wrap.empty().append($img);
-                                //remoteImage.setImage($img.get(0));
-                                remoteImage.setPreview2($li);
+                                // var $img = $('<img src="' + src + '">');
+                                // $wrap.empty().append($img);
+                                // const url = $li.find('img').attr('src');
+                                remoteImage.setPreview(src);
                                 $img.on('error', function () {
                                     $wrap.text(lang.uploadNoPreview);
                                 });
@@ -536,7 +554,6 @@
             function queueFile(file) {
                 if (file && file.source && file.source.source) {
                     var reader = new FileReader();
-                    reader.readAsDataURL(file.source.source);
                     reader.onload = function(e){
                         _this.queueList = [];
                         _this.queueList.push({
@@ -545,6 +562,7 @@
                             id: file.id,
                         });
                     };
+                    reader.readAsDataURL(file.source.source);
                 }
             }
 
@@ -787,6 +805,63 @@
             $upload.addClass('state-' + state);
             updateTotalProgress();
         },
+        setPreview: function(url){
+            var
+                ow = $G('width').value || '',
+                oh = $G('height').value || '',
+                border = $G('border').value || 0,
+                title = $G('title').value || '',
+                preview = $G('preview'),
+                width,
+                height;
+
+            width = ((!ow || !oh) ? preview.offsetWidth:Math.min(ow, preview.offsetWidth));
+            width = width+(border*2) > preview.offsetWidth ? width:(preview.offsetWidth - (border*2));
+            height = (!ow || !oh) ? '':width*oh/ow;
+debugger;
+            if(url) {
+                // preview.innerHTML = '<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />';
+                var $img = $('<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />');
+                debugger;
+                preview.empty().append($img);
+            }
+        },
+        // initEvents: function () {
+        //     var _this = this,
+        //         locker = $G('lock');
+
+        //     /* 改变url */
+        //     domUtils.on($G("upload"), 'keyup', updatePreview);
+        //     domUtils.on($G("border"), 'keyup', updatePreview);
+        //     domUtils.on($G("title"), 'keyup', updatePreview);
+
+        //     domUtils.on($G("width"), 'keyup', function(){
+        //         if(locker.checked) {
+        //             var proportion =locker.getAttribute('data-proportion');
+        //             $G('height').value = Math.round(this.value / proportion);
+        //         } else {
+        //             _this.updateLocker();
+        //         }
+        //         updatePreview();
+        //     });
+        //     domUtils.on($G("height"), 'keyup', function(){
+        //         if(locker.checked) {
+        //             var proportion =locker.getAttribute('data-proportion');
+        //             $G('width').value = Math.round(this.value * proportion);
+        //         } else {
+        //             _this.updateLocker();
+        //         }
+        //         updatePreview();
+        //     });
+        //     domUtils.on($G("lock"), 'change', function(){
+        //         var proportion = parseInt($G("width").value) /parseInt($G("height").value);
+        //         locker.setAttribute('data-proportion', proportion);
+        //     });
+
+        //     function updatePreview(){
+        //         _this.setPreview();
+        //     }
+        // },
         getQueueCount: function () {
             var file, i, status, readyFile = 0, files = this.uploader.getFiles();
             for (i = 0; file = files[i++]; ) {
@@ -797,6 +872,14 @@
         },
         destroy: function () {
             this.$wrap.remove();
+        },
+        getData: function(){
+            var data = {};
+            debugger;
+            for(var k in this.dom){
+                data[k] = this.dom[k].value;
+            }
+            return data;
         },
         getInsertList: function () {
             var i, data, list = [],
@@ -814,6 +897,8 @@
             return list;
         },
         getQueueList: function () {
+            var styleData = this.getData();
+            debugger;
             var data,
                 align = getAlign();
                 data = this.queueList[0];
@@ -821,7 +906,12 @@
                 src: data.src,
                 title: data.name,
                 alt: data.name,
-                floatStyle: align
+                floatStyle: align,
+                width: styleData['width'] || '',
+                height: styleData['height'] || '',
+                border: styleData['border'] || '',
+                vspace: styleData['vhSpace'] || '',
+                style: "width:" + styleData['width'] + "px;height:" + styleData['height'] + "px;"
             }];
         }
     };
