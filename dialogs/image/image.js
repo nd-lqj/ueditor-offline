@@ -306,12 +306,15 @@
                 'title': $G('title'),
                 'align': $G('align')
             };
-            var url = $G('preview').getAttribute('data-img');
-            debugger;
-            // 点击修改时，设置图片
-            if (url) {
-                this.setPreview(url);
+            //var url = $G('preview').getAttribute('data-img');
+            var img = editor.selection.getRange().getClosedNode();
+            if (img) {
+                this.setImage(img);
             }
+            // // 点击修改时，设置图片
+            // if (url) {
+            //     this.setPreview(url);
+            // }
         },
         /* 初始化容器 */
         initUploader: function () {
@@ -457,9 +460,10 @@
                             if (error || !src) {
                                 $wrap.text(lang.uploadNoPreview);
                             } else {
-                                // var $img = $('<img src="' + src + '">');
+                                 var $img = $('<img src="' + src + '">');
                                 // $wrap.empty().append($img);
                                 // const url = $li.find('img').attr('src');
+                            //    $("#preview").attr('data-img',src)
                                 remoteImage.setPreview(src);
                                 $img.on('error', function () {
                                     $wrap.text(lang.uploadNoPreview);
@@ -818,14 +822,50 @@
             width = ((!ow || !oh) ? preview.offsetWidth:Math.min(ow, preview.offsetWidth));
             width = width+(border*2) > preview.offsetWidth ? width:(preview.offsetWidth - (border*2));
             height = (!ow || !oh) ? '':width*oh/ow;
-debugger;
             if(url) {
-                // preview.innerHTML = '<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />';
-                var $img = $('<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />');
-                debugger;
-                preview.empty().append($img);
+                 preview.innerHTML = '<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />';
+              //  var $img = $('<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />');
+               // debugger;
+               // preview.empty().append($img);
             }
         },
+
+        setImage: function(img){
+            /* 不是正常的图片 */
+            if (!img.tagName || img.tagName.toLowerCase() != 'img' && !img.getAttribute("src") || !img.src) return;
+
+            var wordImgFlag = img.getAttribute("word_img"),
+                src = wordImgFlag ? wordImgFlag.replace("&amp;", "&") : (img.getAttribute('_src') || img.getAttribute("src", 2).replace("&amp;", "&")),
+                align = editor.queryCommandValue("imageFloat");
+
+            /* 防止onchange事件循环调用 */
+            if (src !== $G("upload").value) $G("upload").value = src;
+            if(src) {
+                /* 设置表单内容 */
+                $G("width").value = img.width || '';
+                $G("height").value = img.height || '';
+                $G("border").value = img.getAttribute("border") || '0';
+                $G("vhSpace").value = img.getAttribute("vspace") || '0';
+                $G("title").value = img.title || img.alt || '';
+                setAlign(align);
+                this.setPreview(src);
+                this.updateLocker();
+            }
+        },
+        updateLocker: function(){
+            var width = $G('width').value,
+                height = $G('height').value,
+                locker = $G('lock');
+            if(width && height && width == parseInt(width) && height == parseInt(height)) {
+                locker.disabled = false;
+                locker.title = '';
+            } else {
+                locker.checked = false;
+                locker.disabled = 'disabled';
+                locker.title = lang.remoteLockError;
+            }
+        },
+
         // initEvents: function () {
         //     var _this = this,
         //         locker = $G('lock');
