@@ -16,48 +16,12 @@
         initButtons();
     };
 
+    // 初始化
     function init() {
         setAlign(editor.getOpt('imageInsertAlign'));
         uploadImage = uploadImage || new UploadImage('queueList');
+        remoteImage = remoteImage || new RemoteImage();
     }
-
-    /* 初始化tab标签 */
-    // function initTabs() {
-    //     var tabs = $G('tabhead').children;
-    //     for (var i = 0; i < tabs.length; i++) {
-    //         domUtils.on(tabs[i], "click", function (e) {
-    //             var target = e.target || e.srcElement;
-    //             setTabFocus(target.getAttribute('data-content-id'));
-    //         });
-    //     }
-    //     setTabFocus('remote');
-    // }
-
-    /* 初始化tabbody */
-    // function setTabFocus(id) {
-    //     if(!id) return;
-    //     var i, bodyId, tabs = $G('tabhead').children;
-    //     for (i = 0; i < tabs.length; i++) {
-    //         bodyId = tabs[i].getAttribute('data-content-id');
-    //         if (bodyId == id) {
-    //             domUtils.addClass(tabs[i], 'focus');
-    //             domUtils.addClass($G(bodyId), 'focus');
-    //         } else {
-    //             domUtils.removeClasses(tabs[i], 'focus');
-    //             domUtils.removeClasses($G(bodyId), 'focus');
-    //         }
-    //     }
-    //     switch (id) {
-    //         case 'remote':
-    //             uploadImage = uploadImage || new UploadImage('queueList');
-    //             remoteImage = remoteImage || new RemoteImage();
-    //             break;
-    //         case 'upload':
-    //             setAlign(editor.getOpt('imageInsertAlign'));
-    //             uploadImage = uploadImage || new UploadImage('queueList');
-    //             break;
-    //     }
-    // }
 
     /* 初始化onok事件 */
     function initButtons() {
@@ -68,7 +32,6 @@
             }
         };
     }
-
 
     /* 初始化对其方式的点击事件 */
     function initAlign(){
@@ -100,7 +63,6 @@
         return align == 'none' ? '':align;
     }
 
-
     /* 在线图片 */
     function RemoteImage(target) {
         this.container = utils.isString(target) ? document.getElementById(target) : target;
@@ -111,33 +73,33 @@
             this.initContainer();
             this.initEvents();
         },
-        initContainer: function () {
-            this.dom = {
-                'url': $G('preview').getAttribute('data-img'),
-                'width': $G('width'),
-                'height': $G('height'),
-                'border': $G('border'),
-                'vhSpace': $G('vhSpace'),
-                'title': $G('title'),
-                'align': $G('align')
-            };
-            var img = editor.selection.getRange().getClosedNode();
-            if (img) {
-                this.setImage(img);
-            }
-        },
-        initEvents: function () {
-            var _this = this;
+        // initContainer: function () {
+        //     this.dom = {
+        //         'url': $G('preview').getAttribute('data-img'),
+        //         'width': $G('width'),
+        //         'height': $G('height'),
+        //         'border': $G('border'),
+        //         'vhSpace': $G('vhSpace'),
+        //         'title': $G('title'),
+        //         'align': $G('align')
+        //     };
+        //     var img = editor.selection.getRange().getClosedNode();
+        //     if (img) {
+        //         this.setImage(img);
+        //     }
+        // },
+        // initEvents: function () {
+        //     var _this = this;
 
-            /* 改变url */
-            domUtils.on($G("upload"), 'keyup', updatePreview);
-            domUtils.on($G("border"), 'keyup', updatePreview);
-            domUtils.on($G("title"), 'keyup', updatePreview);
+        //     /* 改变url */
+        //     domUtils.on($G("upload"), 'keyup', updatePreview);
+        //     domUtils.on($G("border"), 'keyup', updatePreview);
+        //     domUtils.on($G("title"), 'keyup', updatePreview);
 
-            function updatePreview(){
-                _this.setPreview();
-            }
-        },
+        //     function updatePreview(){
+        //         _this.setPreview();
+        //     }
+        // },
         setImage: function(img){
             /* 不是正常的图片 */
             if (!img.tagName || img.tagName.toLowerCase() != 'img' && !img.getAttribute("src") || !img.src) return;
@@ -214,13 +176,10 @@
     }
     UploadImage.prototype = {
         init: function () {
-            // this.imageList = [];
-            console.log(this.queueList);
-            debugger;
             this.queueList = [];
             this.initContainer();
             this.initUploader();
-            // this.initEvents();
+            this.initEvents();
         },
         initContainer: function () {
             this.$queue = this.$wrap.find('#preview');
@@ -242,6 +201,20 @@
             //     this.setPreview(url);
             // }
         },
+        
+        initEvents: function () {
+            var _this = this;
+            // 改变width/height/border/title
+            domUtils.on($G("width"), 'keyup', updatePreview);
+            domUtils.on($G("height"), 'keyup', updatePreview);
+            domUtils.on($G("border"), 'keyup', updatePreview);
+            domUtils.on($G("title"), 'keyup', updatePreview);
+
+            function updatePreview() {
+                _this.setPreview();
+            }
+        },
+
         /* 初始化容器 */
         initUploader: function () {
             var _this = this,
@@ -332,6 +305,7 @@
 
             // 当有文件添加进来时执行，负责view的创建
             function addFile(file) {
+                debugger;
                 var $li = $('<div id="' + 'uploadImage' + '">' +
                     '</div>'),
 
@@ -582,13 +556,6 @@
                     updateStatus();
 
                 }
-
-                if (!_this.getQueueCount()) {
-                    $upload.addClass('disabled')
-                } else {
-                    $upload.removeClass('disabled')
-                }
-
             }
 
             function updateStatus() {
@@ -731,11 +698,13 @@
                 ow = $G('width').value || '',
                 oh = $G('height').value || '',
                 border = $G('border').value || 0,
+                border = $G('vhSpace').value || 0,
                 title = $G('title').value || '',
                 preview = $G('preview'),
                 width,
                 height;
 
+            // 待处理
             width = ((!ow || !oh) ? preview.offsetWidth:Math.min(ow, preview.offsetWidth));
             width = width+(border*2) > preview.offsetWidth ? width:(preview.offsetWidth - (border*2));
             height = (!ow || !oh) ? '':width*oh/ow;
@@ -748,9 +717,6 @@
         },
 
         setImage: function(img){
-            /* 不是正常的图片 */
-            // if (!img.tagName || img.tagName.toLowerCase() != 'img' && !img.getAttribute("src") || !img.src) return;
-
             var wordImgFlag = img.getAttribute("word_img"),
                 src = wordImgFlag ? wordImgFlag.replace("&amp;", "&") : (img.getAttribute('_src') || img.getAttribute("src", 2).replace("&amp;", "&")),
                 align = editor.queryCommandValue("imageFloat");
@@ -768,40 +734,14 @@
                 this.setPreview(src);
             }
         },
-
-        getQueueCount: function () {
-            var file, i, status, readyFile = 0, files = this.uploader.getFiles();
-            for (i = 0; file = files[i++]; ) {
-                status = file.getStatus();
-                if (status == 'queued' || status == 'uploading' || status == 'progress') readyFile++;
-            }
-            return readyFile;
-        },
-        destroy: function () {
-            this.$wrap.remove();
-        },
+    
+        // 获取用户输入信息
         getData: function(){
             var data = {};
-            debugger;
             for(var k in this.dom){
                 data[k] = this.dom[k].value;
             }
             return data;
-        },
-        getInsertList: function () {
-            var i, data, list = [],
-                align = getAlign(),
-                prefix = editor.getOpt('imageUrlPrefix');
-            for (i = 0; i < this.imageList.length; i++) {
-                data = this.imageList[i];
-                list.push({
-                    src: prefix + data.url,
-                    _src: prefix + data.url,
-                    alt: data.original,
-                    floatStyle: align
-                });
-            }
-            return list;
         },
         getQueueList: function () {
             var styleData = this.getData();
@@ -811,13 +751,13 @@
                 data = this.queueList[0];
             return [{
                 src: data.src,
-                title: data.name,
-                alt: data.name,
                 floatStyle: align,
                 width: styleData['width'] || '',
                 height: styleData['height'] || '',
                 border: styleData['border'] || '',
                 vspace: styleData['vhSpace'] || '',
+                title: styleData['title'] || data.name,
+                alt: styleData['title'] || data.name,
                 style: "width:" + styleData['width'] + "px;height:" + styleData['height'] + "px;"
             }];
         }
