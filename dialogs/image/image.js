@@ -11,76 +11,58 @@
         uploadImage;
 
     window.onload = function () {
-        initTabs();
+        init();
         initAlign();
         initButtons();
     };
 
-    /* 初始化tab标签 */
-    function initTabs() {
-        var tabs = $G('tabhead').children;
-        for (var i = 0; i < tabs.length; i++) {
-            domUtils.on(tabs[i], "click", function (e) {
-                var target = e.target || e.srcElement;
-                setTabFocus(target.getAttribute('data-content-id'));
-            });
-        }
-        setTabFocus('remote');
-        // var img = editor.selection.getRange().getClosedNode();
-        // if (img && img.tagName && img.tagName.toLowerCase() == 'img') {
-        //     setTabFocus('remote');
-        // } else {
-        //     setTabFocus('upload');
-        // }
+    function init() {
+        setAlign(editor.getOpt('imageInsertAlign'));
+        uploadImage = uploadImage || new UploadImage('queueList');
     }
 
+    /* 初始化tab标签 */
+    // function initTabs() {
+    //     var tabs = $G('tabhead').children;
+    //     for (var i = 0; i < tabs.length; i++) {
+    //         domUtils.on(tabs[i], "click", function (e) {
+    //             var target = e.target || e.srcElement;
+    //             setTabFocus(target.getAttribute('data-content-id'));
+    //         });
+    //     }
+    //     setTabFocus('remote');
+    // }
+
     /* 初始化tabbody */
-    function setTabFocus(id) {
-        if(!id) return;
-        var i, bodyId, tabs = $G('tabhead').children;
-        for (i = 0; i < tabs.length; i++) {
-            bodyId = tabs[i].getAttribute('data-content-id');
-            if (bodyId == id) {
-                domUtils.addClass(tabs[i], 'focus');
-                domUtils.addClass($G(bodyId), 'focus');
-            } else {
-                domUtils.removeClasses(tabs[i], 'focus');
-                domUtils.removeClasses($G(bodyId), 'focus');
-            }
-        }
-        switch (id) {
-            case 'remote':
-                uploadImage = uploadImage || new UploadImage('queueList');
-                remoteImage = remoteImage || new RemoteImage();
-                break;
-            case 'upload':
-                setAlign(editor.getOpt('imageInsertAlign'));
-                uploadImage = uploadImage || new UploadImage('queueList');
-                break;
-        }
-    }
+    // function setTabFocus(id) {
+    //     if(!id) return;
+    //     var i, bodyId, tabs = $G('tabhead').children;
+    //     for (i = 0; i < tabs.length; i++) {
+    //         bodyId = tabs[i].getAttribute('data-content-id');
+    //         if (bodyId == id) {
+    //             domUtils.addClass(tabs[i], 'focus');
+    //             domUtils.addClass($G(bodyId), 'focus');
+    //         } else {
+    //             domUtils.removeClasses(tabs[i], 'focus');
+    //             domUtils.removeClasses($G(bodyId), 'focus');
+    //         }
+    //     }
+    //     switch (id) {
+    //         case 'remote':
+    //             uploadImage = uploadImage || new UploadImage('queueList');
+    //             remoteImage = remoteImage || new RemoteImage();
+    //             break;
+    //         case 'upload':
+    //             setAlign(editor.getOpt('imageInsertAlign'));
+    //             uploadImage = uploadImage || new UploadImage('queueList');
+    //             break;
+    //     }
+    // }
 
     /* 初始化onok事件 */
     function initButtons() {
-
         dialog.onok = function () {
-            var list = [], id, tabs = $G('tabhead').children;
-            for (var i = 0; i < tabs.length; i++) {
-                if (domUtils.hasClass(tabs[i], 'focus')) {
-                    id = tabs[i].getAttribute('data-content-id');
-                    break;
-                }
-            }
-
-            switch (id) {
-                case 'remote':
-                    list = uploadImage.getQueueList();
-                    break;
-                case 'upload':
-                    list = uploadImage.getQueueList();
-                    break;
-            }
-
+            const list = uploadImage.getQueueList();
             if(list) {
                 editor.execCommand('insertimage', list);
             }
@@ -145,52 +127,15 @@
             }
         },
         initEvents: function () {
-            var _this = this,
-                locker = $G('lock');
+            var _this = this;
 
             /* 改变url */
             domUtils.on($G("upload"), 'keyup', updatePreview);
             domUtils.on($G("border"), 'keyup', updatePreview);
             domUtils.on($G("title"), 'keyup', updatePreview);
 
-            domUtils.on($G("width"), 'keyup', function(){
-                if(locker.checked) {
-                    var proportion =locker.getAttribute('data-proportion');
-                    $G('height').value = Math.round(this.value / proportion);
-                } else {
-                    _this.updateLocker();
-                }
-                updatePreview();
-            });
-            domUtils.on($G("height"), 'keyup', function(){
-                if(locker.checked) {
-                    var proportion =locker.getAttribute('data-proportion');
-                    $G('width').value = Math.round(this.value * proportion);
-                } else {
-                    _this.updateLocker();
-                }
-                updatePreview();
-            });
-            domUtils.on($G("lock"), 'change', function(){
-                var proportion = parseInt($G("width").value) /parseInt($G("height").value);
-                locker.setAttribute('data-proportion', proportion);
-            });
-
             function updatePreview(){
                 _this.setPreview();
-            }
-        },
-        updateLocker: function(){
-            var width = $G('width').value,
-                height = $G('height').value,
-                locker = $G('lock');
-            if(width && height && width == parseInt(width) && height == parseInt(height)) {
-                locker.disabled = false;
-                locker.title = '';
-            } else {
-                locker.checked = false;
-                locker.disabled = 'disabled';
-                locker.title = lang.remoteLockError;
             }
         },
         setImage: function(img){
@@ -212,7 +157,6 @@
                 $G("title").value = img.title || img.alt || '';
                 setAlign(align);
                 this.setPreview();
-                this.updateLocker();
             }
         },
         getData: function(){
@@ -222,24 +166,6 @@
             }
             return data;
         },
-        // setPreview: function(){
-        //     var url = $G('preview').value,
-        //         ow = $G('width').value,
-        //         oh = $G('height').value,
-        //         border = $G('border').value,
-        //         title = $G('title').value,
-        //         preview = $G('preview'),
-        //         width,
-        //         height;
-
-        //     width = ((!ow || !oh) ? preview.offsetWidth:Math.min(ow, preview.offsetWidth));
-        //     width = width+(border*2) > preview.offsetWidth ? width:(preview.offsetWidth - (border*2));
-        //     height = (!ow || !oh) ? '':width*oh/ow;
-
-        //     if(url) {
-        //         preview.innerHTML = '<img src="' + url + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" />';
-        //     }
-        // },
         setPreview: function(url){
             var
                 ow = $G('width').value || '',
@@ -401,32 +327,17 @@
                     preserveHeaders: true
                 }:false
             });
-            // uploader.addButton({
-            //     id: '#preview'
-            // });
-            // uploader.addButton({
-            //     id: '#filePickerBtn',
-            //     label: lang.uploadAddFile
-            // });
 
             setState('pedding');
 
             // 当有文件添加进来时执行，负责view的创建
             function addFile(file) {
                 var $li = $('<div id="' + 'uploadImage' + '">' +
-                    // '<p class="title">' + file.name + '</p>' +
-                   // '<p class="imgWrap"></p>' +
-                    // '<p class="progress"><span></span></p>' +
                     '</div>'),
 
-                    // $btns = $('<div class="file-panel">' +
-                    // '<span class="cancel">' + lang.uploadDelete + '</span>' +
-                    // '<span class="rotateRight">' + lang.uploadTurnRight + '</span>' +
-                    // '<span class="rotateLeft">' + lang.uploadTurnLeft + '</span><///div>').appendTo($li),
-                    $prgress = $li.find('p.progress span'),
-                   // $wrap = $li.find('p.imgWrap'),
+                   $prgress = $li.find('p.progress span'),
                    $wrap = $li,
-                    $info = $('<p class="error"></p>').hide().appendTo($li),
+                   $info = $('<p class="error"></p>').hide().appendTo($li),
 
                     showError = function (code) {
                         switch (code) {
@@ -461,9 +372,6 @@
                                 $wrap.text(lang.uploadNoPreview);
                             } else {
                                  var $img = $('<img src="' + src + '">');
-                                // $wrap.empty().append($img);
-                                // const url = $li.find('img').attr('src');
-                            //    $("#preview").attr('data-img',src)
                                 remoteImage.setPreview(src);
                                 $img.on('error', function () {
                                     $wrap.text(lang.uploadNoPreview);
@@ -560,10 +468,19 @@
                     var reader = new FileReader();
                     reader.onload = function(e){
                         _this.queueList = [];
+                        const data = e.target.result;
+                        const img = new Image();
+                        img.onload = () => {
+                          const { width, height } = img;
+                          console.log(width, height);
+                        };
+                        img.src = data;
                         _this.queueList.push({
-                            src: this.result,
+                            src: e.target.result,
                             name: file.name,
                             id: file.id,
+                            width,
+                            height,
                         });
                     };
                     reader.readAsDataURL(file.source.source);
@@ -832,7 +749,7 @@
 
         setImage: function(img){
             /* 不是正常的图片 */
-            if (!img.tagName || img.tagName.toLowerCase() != 'img' && !img.getAttribute("src") || !img.src) return;
+            // if (!img.tagName || img.tagName.toLowerCase() != 'img' && !img.getAttribute("src") || !img.src) return;
 
             var wordImgFlag = img.getAttribute("word_img"),
                 src = wordImgFlag ? wordImgFlag.replace("&amp;", "&") : (img.getAttribute('_src') || img.getAttribute("src", 2).replace("&amp;", "&")),
@@ -849,59 +766,9 @@
                 $G("title").value = img.title || img.alt || '';
                 setAlign(align);
                 this.setPreview(src);
-                this.updateLocker();
-            }
-        },
-        updateLocker: function(){
-            var width = $G('width').value,
-                height = $G('height').value,
-                locker = $G('lock');
-            if(width && height && width == parseInt(width) && height == parseInt(height)) {
-                locker.disabled = false;
-                locker.title = '';
-            } else {
-                locker.checked = false;
-                locker.disabled = 'disabled';
-                locker.title = lang.remoteLockError;
             }
         },
 
-        // initEvents: function () {
-        //     var _this = this,
-        //         locker = $G('lock');
-
-        //     /* 改变url */
-        //     domUtils.on($G("upload"), 'keyup', updatePreview);
-        //     domUtils.on($G("border"), 'keyup', updatePreview);
-        //     domUtils.on($G("title"), 'keyup', updatePreview);
-
-        //     domUtils.on($G("width"), 'keyup', function(){
-        //         if(locker.checked) {
-        //             var proportion =locker.getAttribute('data-proportion');
-        //             $G('height').value = Math.round(this.value / proportion);
-        //         } else {
-        //             _this.updateLocker();
-        //         }
-        //         updatePreview();
-        //     });
-        //     domUtils.on($G("height"), 'keyup', function(){
-        //         if(locker.checked) {
-        //             var proportion =locker.getAttribute('data-proportion');
-        //             $G('width').value = Math.round(this.value * proportion);
-        //         } else {
-        //             _this.updateLocker();
-        //         }
-        //         updatePreview();
-        //     });
-        //     domUtils.on($G("lock"), 'change', function(){
-        //         var proportion = parseInt($G("width").value) /parseInt($G("height").value);
-        //         locker.setAttribute('data-proportion', proportion);
-        //     });
-
-        //     function updatePreview(){
-        //         _this.setPreview();
-        //     }
-        // },
         getQueueCount: function () {
             var file, i, status, readyFile = 0, files = this.uploader.getFiles();
             for (i = 0; file = files[i++]; ) {
