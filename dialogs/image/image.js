@@ -554,7 +554,12 @@
 
                     state = val;
                     updateStatus();
+                }
 
+                if (!_this.getQueueCount()) {
+                    $upload.addClass('disabled')
+                } else {
+                    $upload.removeClass('disabled')
                 }
             }
 
@@ -743,6 +748,16 @@
             }
             return data;
         },
+
+        getQueueCount: function () {
+            var file, i, status, readyFile = 0, files = this.uploader.getFiles();
+            for (i = 0; file = files[i++]; ) {
+                status = file.getStatus();
+                if (status == 'queued' || status == 'uploading' || status == 'progress') readyFile++;
+            }
+            return readyFile;
+        },
+
         getQueueList: function () {
             var styleData = this.getData();
             debugger;
