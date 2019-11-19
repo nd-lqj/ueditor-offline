@@ -18,12 +18,6 @@
 <body>
 
     <div class="wrapper">
-        <!-- <div id="tabhead" class="tabhead">
-            插入图片
-            <span class="tab focus" data-content-id="remote"><var id="lang_tab_remote"></var></span>
-            本地图片
-            <span class="tab " data-content-id="upload"><var id="lang_tab_upload"></var></span>
-        </div> -->
         <div class="alignBar">
             <label class="algnLabel"><var id="lang_input_align"></var></label>
                     <span id="alignIcon">
@@ -41,8 +35,6 @@
                     <div class="row">
                         <div style="display: flex;">
                                 <label><var id="lang_upload_image"></var></label>
-                                <!-- <span><input class="remote-element-invisible" id="upload" type="file" accept="image/*"/></span>
-                                <label class="remote_upload_btn">上传</label> -->
                                 <div id="dndArea" class="placeholder">
                                     <div class="filePickerContainer">
                                         <div id="filePickerReady"></div>
@@ -59,7 +51,6 @@
                         <label><var id="lang_input_size"></var></label>
                         <span><var id="lang_input_width">&nbsp;&nbsp;</var><input class="text" type="text" id="width"/>px </span>
                         <span><var id="lang_input_height">&nbsp;&nbsp;</var><input class="text" type="text" id="height"/>px </span>
-                        <!-- <span><input id="lock" type="checkbox" disabled="disabled"><span id="lockicon"></span></span> -->
                     </div>
                     <div class="row">
                         <label><var id="lang_input_border"></var></label>
@@ -75,37 +66,10 @@
                     </div>
                 </div>
                 <div class="right"  id="queueList">
-                    <!-- <ul >
-                        <li id="filePickerBlock" class="filePickerBlock"></li>
-                    </ul> -->
                     <div id="preview" class="filelist"></div>
                     <div id="filePickerBlock" class="filePickerBlock"></div>
                 </div>
             </div>
-
-            <!-- 上传图片 -->
-            <!-- <div id="upload" class="panel">
-                <div id="queueList" class="queueList">
-                    <div class="statusBar element-invisible">
-                        <div class="progress">
-                            <span class="text">0%</span>
-                            <span class="percentage"></span>
-                        </div><div class="info"></div>
-                        <div class="btns">
-                            <div id="filePickerBtn"></div>
-                            <div class="uploadBtn"><var id="lang_start_upload"></var></div>
-                        </div>
-                    </div>
-                    <div id="dndArea" class="placeholder">
-                        <div class="filePickerContainer">
-                            <div id="filePickerReady"></div>
-                        </div>
-                    </div>
-                    <ul class="filelist element-invisible">
-                        <li id="filePickerBlock" class="filePickerBlock"></li>
-                    </ul>
-                </div>
-            </div> -->
         </div>
     </div>
     <script type="text/javascript" src="image.js"></script>

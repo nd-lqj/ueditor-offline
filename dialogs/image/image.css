@@ -210,7 +210,8 @@
     z-index: 9999;
     margin-top: 10px;
     background-color: #eee;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow: auto;
 }
 
 /* 上传图片 */
