@@ -156,9 +156,6 @@
             if (!WebUploader.Uploader.support()) {
                 $('#filePickerReady').after($('<div>').html(lang.errorNotSupport)).hide();
                 return;
-            // } else if (!editor.getOpt('imageActionName')) {
-            //     $('#filePickerReady').after($('<div>').html(lang.errorLoadConfig)).hide();
-            //     return;
             }
 
             uploader = _this.uploader = WebUploader.create({
@@ -171,7 +168,6 @@
                     extensions: acceptExtensions,
                     mimeTypes: 'image/*'
                 },
-                // swf: '../../third-party/webuploader/Uploader.swf',
                 server: actionUrl,
                 fileVal: editor.getOpt('imageFieldName'),
                 duplicate: true,
@@ -295,13 +291,6 @@
 
                     $li.removeClass('state-' + prev).addClass('state-' + cur);
                 });
-
-                $li.on('mouseenter', function () {
-                    // $btns.stop().animate({height: 30});
-                });
-                $li.on('mouseleave', function () {
-                    // $btns.stop().animate({height: 0});
-                });
                 $("#preview").append($li);
                 
             }
@@ -314,7 +303,7 @@
                 updateTotalProgress();
                 $li.off().find('.file-panel').off().end().remove();
             }
-            
+
             function dequeueFile() {
                 _this.queueList = [];
             }
@@ -350,18 +339,12 @@
 
                         /* 未选择文件 */
                         case 'pedding':
-                            // $queue.addClass('element-invisible');
-                            // $statusBar.addClass('element-invisible');
-                            // $placeHolder.removeClass('element-invisible');
                             $progress.hide(); $info.hide();
                             uploader.refresh();
                             break;
 
                         /* 可以开始上传 */
                         case 'ready':
-                            // $placeHolder.addClass('element-invisible');
-                            // $queue.removeClass('element-invisible');
-                            // $statusBar.removeClass('element-invisible');
                             $progress.hide(); $info.show();
                             $upload.text(lang.uploadStart);
                             uploader.refresh();
@@ -544,7 +527,7 @@
                 height = oh || this.queueList[0].height;
             }
 
-            // 待处理
+            // 获取当前区域宽高
             // width = ((!ow || !oh) ? preview.offsetWidth:Math.min(ow, preview.offsetWidth));
             // width = width+(border*2) > preview.offsetWidth ? width:(preview.offsetWidth - (border*2));
             // height = (!ow || !oh) ? '':width*oh/ow;
@@ -552,10 +535,6 @@
             imgUrl = url ? url : this.queueList[0].src;
 
              preview.innerHTML = '<img src="' + imgUrl + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" vspace="' + vspace + '"  />';
-            // var $img = $('<img src="' + imgUrl + '" width="' + width + '" height="' + height + '" border="' + border + 'px solid #000" title="' + title + '" vspace="' + vspace + '" />');
-            // preview.empty().append($img);
-            // uploader.removeFile();
-            // preview.innerHTML = $img;
         },
 
         setImage: function(img){
@@ -564,7 +543,6 @@
                 align = editor.queryCommandValue("imageFloat");
 
             /* 防止onchange事件循环调用 */
-            console.log($G('preview'));
             if (src !== $G("preview").value) $G("preview").value = src;
             if(src) {
                 /* 设置表单内容 */
@@ -587,6 +565,7 @@
             return data;
         },
 
+        // 
         getQueueList: function () {
             var styleData = this.getData();
             var data,
