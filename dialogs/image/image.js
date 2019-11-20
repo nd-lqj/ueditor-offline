@@ -488,7 +488,6 @@
             uploader.on('error', function (code, file) {
                 if (code == 'Q_TYPE_DENIED' || code == 'F_EXCEED_SIZE') {
                     addFile(file);
-                    // queueFile(file);
                 }
             });
             uploader.on('uploadComplete', function (file, ret) {
@@ -565,7 +564,7 @@
             return data;
         },
 
-        // 
+        // 获取图片列表
         getQueueList: function () {
             var styleData = this.getData();
             var data,
