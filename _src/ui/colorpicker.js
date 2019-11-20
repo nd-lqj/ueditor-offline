@@ -17,6 +17,7 @@
       var tgt = evt.target || evt.srcElement;
       var color = tgt.getAttribute("data-color");
       if (color) {
+        debugger;
         this.fireEvent("pickcolor", color);
       }
     },
@@ -32,6 +33,11 @@
     },
     _onPickNoColor: function() {
       this.fireEvent("picknocolor");
+    },
+    _onExactInputKeyup: function(evt) {
+      var tgt = evt.target || evt.srcElement;
+      var color = tgt.getAttribute("exactColor");
+      debugger;
     }
   };
   utils.inherits(ColorPicker, UIBase);
@@ -57,9 +63,11 @@
       "</div>" +
       '<table  class="edui-box" style="border-collapse: collapse;" onmouseover="$$._onTableOver(event, this);" onmouseout="$$._onTableOut(event, this);" onclick="return $$._onTableClick(event, this);" cellspacing="0" cellpadding="0">' +
       '<tr style="border-bottom: 1px solid #ddd;font-size: 13px;line-height: 25px;color:#39C;padding-top: 2px"><td colspan="10">' +
+      // 主題顏色
       editor.getLang("themeColor") +
       "</td> </tr>" +
       '<tr class="edui-colorpicker-tablefirstrow" >';
+    // 標準顏色
     for (var i = 0; i < COLORS.length; i++) {
       if (i && i % 10 === 0) {
         html +=
@@ -92,7 +100,12 @@
             "></a></td>"
         : "";
     }
+    html +=  '<tr style="border-bottom: 1px solid #ddd;font-size: 13px;line-height: 25px;color:#39C;padding-top: 2px"><td colspan="10">' +
+    // 精準顏色
+    editor.getLang("exactColor") +
+    "</td> </tr>";
     html += "</tr></table></div>";
+    html += '<span class="exact-color" style="display: inline-block;margin-top: 5px;">#<input keyup="return $$._onExactInputKeyup(event, this);" style="margin-left: 4px;" class="text" type="text" id="exactColor"/></span>';
     return html;
   }
 })();

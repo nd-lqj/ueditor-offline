@@ -180,6 +180,7 @@ UE.I18N['en'] = {
     'clearColor':'Clear',
     'standardColor':'Standard color',
     'themeColor':'Theme color',
+    'exactColor': 'Exact color',
     'property':'Property',
     'default':'Default',
     'modify':'Modify',

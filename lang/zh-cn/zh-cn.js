@@ -179,6 +179,7 @@ UE.I18N['zh-cn'] = {
     'clearColor':'清空颜色',
     'standardColor':'标准颜色',
     'themeColor':'主题颜色',
+    'exactColor': '精准颜色',
     'property':'属性',
     'default':'默认',
     'modify':'修改',
