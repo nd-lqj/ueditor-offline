@@ -103,9 +103,10 @@
     html +=  '<tr style="border-bottom: 1px solid #ddd;font-size: 13px;line-height: 25px;color:#39C;padding-top: 2px"><td colspan="10">' +
     // 精準顏色
     editor.getLang("exactColor") +
-    "</td>";
-    html += "</tr></table></div>";
+    "</td></tr>";
+    html += "</table></div>";
     html += '<span class="exact-color" style="display: inline-block;margin-top: 5px;">#<input onmousedown="this.focus();" mouseleave ="this.blur();" keyup="return $$._onExactInputKeyup(event, this);" style="margin-left: 4px;" class="text" type="text" id="exactColor"/><button style="margin-left: 10px">确认</button></span>';
+
     return html;
   }
 })();
