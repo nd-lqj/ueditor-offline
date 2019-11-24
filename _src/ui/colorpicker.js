@@ -36,6 +36,7 @@
     _onCheckColor:function(evt){
       var color = document.getElementById('exactColor').value;
        if (color) {
+        document.getElementById('exactColor').value = ''
         this.fireEvent("pickcolor", '#'+color);
       }
     },
@@ -119,9 +120,10 @@
     html += '<span class="exact-color" ' +
     'style="display: inline-block;margin-top: 5px;">#' +
     '<input' +
-    'onmousedown="this.focus(); this.copy(); this.paste(); this.cut();"' +
+    ' onmousedown="this.focus();"' +
     'onmouseleave ="this.blur();"' +
     'onkeyup="return $$._onExactInputKeyup(event, this);"' +
+    'onblur="return $$._onExactInputKeyup(event, this);"' +
     'style="margin-left: 4px;" class="text" type="text" id="exactColor"/>' +
     '<button style="margin-left: 10px" onclick="return $$._onCheckColor(event,this)">确认</button></span>';
     return html;
