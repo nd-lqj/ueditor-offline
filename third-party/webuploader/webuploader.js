@@ -2764,7 +2764,7 @@
              * @description 添加文件到队列
              * @for  Uploader
              */
-            addFiles: function( files ) { debugger;
+            addFiles: function( files ) {
                 var me = this;
     
                 if ( !files.length ) {

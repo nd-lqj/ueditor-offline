@@ -124,7 +124,12 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['./dialogs/**/*', 'ueditor.config.js', './third-party/**/*', './lang/**/*'],
+        files: [
+          './_src/**/*',
+          'ueditor.config.js',
+          './third-party/**/*',
+          './themes/**/*',
+        ],
         tasks:['default'],
         options: {livereload:false}
     },

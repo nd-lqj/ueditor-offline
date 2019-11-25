@@ -39,7 +39,8 @@
                 disablesortState = editor.queryCommandState("disablesort");
 
             sorttable.checked = !!(enablesortState < 0 && disablesortState >=0);
-            sorttable.disabled = !!(enablesortState < 0 && disablesortState < 0);
+            debugger;
+            // sorttable.disabled = !!(enablesortState < 0 && disablesortState < 0);
             sorttable.title = enablesortState < 0 && disablesortState < 0 ? lang.errorMsg:'';
 
             me.createTable(title.checked, titleCol.checked, caption.checked);
