@@ -122,6 +122,18 @@ module.exports = function(grunt) {
         dest: disDir + "<%= pkg.name %>.parse.min.js"
       }
     },
+    watch: {
+      scripts: {
+        files: [
+          './_src/**/*',
+          'ueditor.config.js',
+          './third-party/**/*',
+          './themes/**/*',
+        ],
+        tasks:['default'],
+        options: {livereload:false}
+    },
+    },
     copy: {
       base: {
         files: [
@@ -246,6 +258,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-transcoding");
   grunt.loadNpmTasks("grunt-contrib-clean");
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask("default", "UEditor build", function() {
     var tasks = [
@@ -273,6 +286,8 @@ module.exports = function(grunt) {
 
     grunt.task.run(tasks);
   });
+
+  grunt.registerTask('watcher',['watch']);
 
   function updateConfigFile() {
     var filename = "ueditor.config.js",

@@ -180,6 +180,7 @@ UE.I18N['en'] = {
     'clearColor':'Clear',
     'standardColor':'Standard color',
     'themeColor':'Theme color',
+    'exactColor': 'Exact color',
     'property':'Property',
     'default':'Default',
     'modify':'Modify',
@@ -243,6 +244,7 @@ UE.I18N['en'] = {
             'lang_tab_online':"Manager",
             'lang_tab_search':"Search",
             'lang_input_url':"Address:",
+            'lang_upload_image':"Upload:",
             'lang_input_size':"Size:",
             'lang_input_width':"Width",
             'lang_input_height':"Height",
@@ -524,6 +526,7 @@ UE.I18N['en'] = {
     insertframe:{
         'static':{
             'lang_input_address':'Address：',
+            'lang_input_upload':'Upload：',
             'lang_input_width':'Width：',
             'lang_input_height':'height：',
             'lang_input_isScroll':'Enable scrollbars：',

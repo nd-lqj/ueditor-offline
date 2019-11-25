@@ -121,9 +121,30 @@
     height: 40px;
 }
 
+#remote .row .remote-element-invisible {
+    position: absolute !important;
+    clip: rect(1px,1px,1px,1px);
+}
+
+#remote .row .remote_upload_btn {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: #00b7ee;
+    padding: 10px 15px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#remote .row .remote_upload_btn:hover {
+    background: #00a2d4;
+}
+
 #remote .row label{
     text-align: center;
-    width: 50px;
+    width: 60px;
     zoom:1;
     _display: inline;
     display:inline-block;
@@ -189,7 +210,8 @@
     z-index: 9999;
     margin-top: 10px;
     background-color: #eee;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow: auto;
 }
 
 /* 上传图片 */
