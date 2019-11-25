@@ -17,7 +17,6 @@
       var tgt = evt.target || evt.srcElement;
       var color = tgt.getAttribute("data-color");
       if (color) {
-        debugger;
         this.fireEvent("pickcolor", color);
       }
     },
@@ -34,10 +33,22 @@
     _onPickNoColor: function() {
       this.fireEvent("picknocolor");
     },
+    _onCheckColor:function(evt){
+      var color = document.getElementById('exactColor').value;
+       if (color) {
+        document.getElementById('exactColor').value = ''
+        this.fireEvent("pickcolor", '#'+color);
+      }
+    },
     _onExactInputKeyup: function(evt) {
-      debugger;
       var tgt = evt.target || evt.srcElement;
-      var color = tgt.getAttribute("exactColor");
+      var color = tgt.value.replace(/[^0-9a-fA-F]/g, '').toUpperCase().substring(0, 6);
+      tgt.value = color;
+      if (color &&  (color.length===6 || color.length === 3)) {
+        this.getDom("preview").style.backgroundColor = '#' +color;
+      }else {
+        this.getDom("preview").style.backgroundColor = '#fff';
+      }
     }
   };
   utils.inherits(ColorPicker, UIBase);
@@ -106,7 +117,15 @@
     editor.getLang("exactColor") +
     "</td></tr>";
     html += "</table></div>";
-    html += '<span class="exact-color" style="display: inline-block;margin-top: 5px;">#<input onmousedown="this.focus();" onmouseleave ="this.blur();" keyup="return $$._onExactInputKeyup(event, this);" style="margin-left: 4px;" class="text" type="text" id="exactColor"/><button style="margin-left: 10px">确认</button></span>';
+    html += '<span class="exact-color" ' +
+    'style="display: inline-block;margin-top: 5px;">#' +
+    '<input' +
+    ' onmousedown="this.focus();"' +
+    'onmouseleave ="this.blur();"' +
+    'onkeyup="return $$._onExactInputKeyup(event, this);"' +
+    'onblur="return $$._onExactInputKeyup(event, this);"' +
+    'style="margin-left: 4px;" class="text" type="text" id="exactColor"/>' +
+    '<button style="margin-left: 10px" onclick="return $$._onCheckColor(event,this)">确认</button></span>';
     return html;
   }
 })();
