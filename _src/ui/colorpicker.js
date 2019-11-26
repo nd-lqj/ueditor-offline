@@ -19,6 +19,7 @@
       if (color) {
         this.fireEvent("pickcolor", color);
       }
+      document.getElementById('exactColor').value = '';
     },
     _onTableOver: function(evt) {
       var tgt = evt.target || evt.srcElement;
@@ -36,16 +37,29 @@
     _onCheckColor:function(evt){
       var color = document.getElementById('exactColor').value;
        if (color) {
-        document.getElementById('exactColor').value = ''
-        this.fireEvent("pickcolor", '#'+color);
+        this.fireEvent("pickcolor", '#'+ color);
+      } else {
+        // 确认后清空输入框内容
+        document.getElementById('exactColor').value = '';
       }
     },
     _onExactInputKeyup: function(evt) {
       var tgt = evt.target || evt.srcElement;
-      var color = tgt.value.replace(/[^0-9a-fA-F]/g, '').toUpperCase().substring(0, 6);
-      tgt.value = color;
-      if (color &&  (color.length===6 || color.length === 3)) {
-        this.getDom("preview").style.backgroundColor = '#' +color;
+      var color = tgt.value.trim();
+      var $input = document.getElementsByTagName('input')[0];
+      var $btn = document.getElementsByTagName('button')[0];
+      var classList = Array.from($input.classList);
+      if (color !== color.replace(/[^0-9a-fA-F]/g, '') || color.length > 6) {
+        if (classList.indexOf('error') === -1) {
+          document.getElementsByTagName('input')[0].className = 'text edui-default error';
+          document.getElementsByTagName('button')[0].disabled = true;
+        }
+      } else {
+        document.getElementsByTagName('input')[0].className = 'text edui-default default';
+        $btn.disabled = false;
+      }
+      if (color) {
+        this.getDom("preview").style.backgroundColor = '#' + color.replace(/[^0-9a-fA-F]/g, '');
       }else {
         this.getDom("preview").style.backgroundColor = '#fff';
       }
@@ -120,12 +134,11 @@
     html += '<span class="exact-color" ' +
     'style="display: inline-block;margin-top: 5px;">#' +
     '<input' +
-    ' onmousedown="this.focus();"' +
-    'onmouseleave ="this.blur();"' +
+    ' onmousedown="this.focus(); return $$._onExactInputKeyup(event, this);"' +
     'onkeyup="return $$._onExactInputKeyup(event, this);"' +
     'onblur="return $$._onExactInputKeyup(event, this);"' +
-    'style="margin-left: 4px;" class="text" type="text" id="exactColor"/>' +
-    '<button style="margin-left: 10px" onclick="return $$._onCheckColor(event,this)">确认</button></span>';
+    'style="margin-left: 8px;" class="text default" type="text" id="exactColor"/>' +
+    '<button style="margin-left: 12px" onclick="return $$._onCheckColor(event,this)">确认</button></span>';
     return html;
   }
 })();
