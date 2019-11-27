@@ -243,7 +243,6 @@ UE.commands["insertimage"] = {
         ci;
       ci = opt[0];
       if (opt.length == 1) {
-        debugger;
         str =
           '<img ' +
           (ci.fileid ? 'fileidstart="' + ci.fileid + '" ' : "") +
@@ -264,7 +263,6 @@ UE.commands["insertimage"] = {
         html.push(str);
       } else {
         for (var i = 0; (ci = opt[i++]); ) {
-          debugger;
           str =
             "<p " +
             (ci["floatStyle"] == "center" ? 'style="text-align: center" ' : "") +

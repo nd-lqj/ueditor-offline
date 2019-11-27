@@ -53,7 +53,6 @@ test( '表格插入时间和日期', function () {
     sec = (sec < 10) ? ('0' + sec) : sec;
     editor.execCommand( 'time' );
     ua.manualDeleteFillData(td[0]);
-    debugger
     equal( td[0].innerHTML, h + ':' + min + ':' + sec+(ua.browser.ie==9||ua.browser.ie==10?' ':''));
     range.setStart( td[1], 0 ).collapse( 1 ).select();
     editor.execCommand( 'time','hh.ii.ss' );
