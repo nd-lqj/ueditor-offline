@@ -68,8 +68,6 @@ UE.plugin.register("insertfile", function() {
               '<p style="line-height: 16px;">' +
               '<img style="vertical-align: middle; margin-right: 2px;" src="' +
               icon +
-              '" _src="' +
-              icon +
               '" />' +
               '<a style="font-size:12px; color:#0066cc;" href="' +
               item.url +

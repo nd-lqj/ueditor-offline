@@ -62,7 +62,6 @@ var UEDITOR_CONFIG2 = {
         'image': '图片',
         'inserttable': '表格',
         'link': '超链接',
-        'emoticon': '表情',
         'spechars': '特殊字符',
         'searchreplace': '查询替换',
         'map': 'Baidu地图',
@@ -87,7 +86,6 @@ var UEDITOR_CONFIG2 = {
         'image': '~/dialogs/image/image.html',
         'inserttable': '~/dialogs/table/table.html',
         'link': '~/dialogs/link/link.html',
-        'emoticon': '~/dialogs/emoticon/emoticon.html',
         'spechars': '~/dialogs/spechars/spechars.html',
         'searchreplace': '~/dialogs/searchreplace/searchreplace.html',
         'map': '~/dialogs/map/map.html',
@@ -95,7 +93,6 @@ var UEDITOR_CONFIG2 = {
         'video': '~/dialogs/video/video.html',
         'help': '~/dialogs/help/help.html',
         'code' : '~/dialogs/code/code.html',
-        'multimenu': '~/dialogs/menu-emoticon/emoticon.html'
     },
     listMap: {
         'fontfamily': ['宋体', '楷体', '隶书', '黑体','andale mono','arial','arial black','comic sans ms','impact','times new roman'],

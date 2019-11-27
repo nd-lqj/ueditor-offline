@@ -62,7 +62,6 @@ var UEDITOR_CONFIG = {
         'image': '图片',
         'inserttable': '表格',
         'link': '超链接',
-        'emoticon': '表情',
         'spechars': '特殊字符',
         'searchreplace': '查询替换',
         'map': 'Baidu地图',
@@ -88,7 +87,6 @@ var UEDITOR_CONFIG = {
         'image': '../../../dialogs/image/image.html',
         'inserttable': '../../../dialogs/table/table.html',
         'link': '../../../dialogs/link/link.html',
-        'emoticon': '../../../dialogs/emoticon/emoticon.html',
         'spechars': '../../../dialogs/spechars/spechars.html',
         'searchreplace': '../../../dialogs/searchreplace/searchreplace.html',
         'map': '../../../dialogs/map/map.html',
@@ -96,7 +94,6 @@ var UEDITOR_CONFIG = {
         'video': '../../../dialogs/video/video.html',
         'help': '../../../dialogs/help/help.html',
         'code' : '../../../dialogs/code/code.html',
-        'multimenu': '../../../dialogs/menu-emoticon/emoticon.html',
         'insertframe': '../../../dialogs/insertframe/insertframe.html'
     },
     listMap: {
@@ -228,7 +225,7 @@ var UEDITOR_CONFIG = {
     initialStyle: '',                                    //编辑器内部样式
     initialContent: 'hello',  //初始化编辑器的内容
     autoClearinitialContent :true,                       //是否自动清除编辑器初始内容
-    iframeCssUrl :'../../../themes/iframe.css',        //要引入css的url
+    iframeCssUrl :'../../../themes/iframe.css',          //要引入css的url
     removeFormatTags : 'b,big,code,del,dfn,em,font,i,ins,kbd,q,samp,small,span,strike,strong,sub,sup,tt,u,var',    //配置格式刷删除的标签
     removeFormatAttributes : 'class,style,lang,width,height,align,hspace,valign',        //配置格式刷删除的属性
     enterTag : 'p',                                      //编辑器回车标签。p或br
@@ -247,6 +244,7 @@ var UEDITOR_CONFIG = {
     autoHeightEnabled: true,                             //是否自动长高
     autoFloatEnabled: true,                              //是否保持toolbar的位置不动
     elementPathEnabled : true,                           //是否启用elementPath
+    imageUploadFunc: null,                               //图片上传方法
     serialize : function(){                              //配置过滤标签
         function X( t, s, b ) {
             var o = {};

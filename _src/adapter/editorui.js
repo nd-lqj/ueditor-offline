@@ -38,7 +38,6 @@
     insertvideo: "~/dialogs/video/video.html",
     help: "~/dialogs/help/help.html",
     preview: "~/dialogs/preview/preview.html",
-    emotion: "~/dialogs/emotion/emotion.html",
     wordimage: "~/dialogs/wordimage/wordimage.html",
     attachment: "~/dialogs/attachment/attachment.html",
     insertframe: "~/dialogs/insertframe/insertframe.html",
@@ -879,30 +878,6 @@
     return ui;
   };
 
-  // 表情
-  editorui["emotion"] = function(editor, iframeUrl) {
-    var cmd = "emotion";
-    var ui = new editorui.MultiMenuPop({
-      title:
-        editor.options.labelMap[cmd] ||
-          editor.getLang("labelMap." + cmd + "") ||
-          "",
-      editor: editor,
-      className: "edui-for-" + cmd,
-      iframeUrl: editor.ui.mapUrl(
-        iframeUrl ||
-          (editor.options.iframeUrlMap || {})[cmd] ||
-          iframeUrlMap[cmd]
-      )
-    });
-    editorui.buttons[cmd] = ui;
-
-    editor.addListener("selectionchange", function() {
-      ui.setDisabled(editor.queryCommandState(cmd) == -1);
-    });
-    return ui;
-  };
-
   editorui.autotypeset = function(editor) {
     var ui = new editorui.AutoTypeSetButton({
       editor: editor,
@@ -918,40 +893,6 @@
     editorui.buttons["autotypeset"] = ui;
     editor.addListener("selectionchange", function() {
       ui.setDisabled(editor.queryCommandState("autotypeset") == -1);
-    });
-    return ui;
-  };
-
-  /* 简单上传插件 */
-  editorui["simpleupload"] = function(editor) {
-    var name = "simpleupload",
-      ui = new editorui.Button({
-        className: "edui-for-" + name,
-        title:
-          editor.options.labelMap[name] ||
-            editor.getLang("labelMap." + name) ||
-            "",
-        onclick: function() {},
-        theme: editor.options.theme,
-        showText: false
-      });
-    editorui.buttons[name] = ui;
-    editor.addListener("ready", function() {
-      var b = ui.getDom("body"),
-        iconSpan = b.children[0];
-      editor.fireEvent("simpleuploadbtnready", iconSpan);
-    });
-    editor.addListener("selectionchange", function(type, causeByUi, uiReady) {
-      var state = editor.queryCommandState(name);
-      if (state == -1) {
-        ui.setDisabled(true);
-        ui.setChecked(false);
-      } else {
-        if (!uiReady) {
-          ui.setDisabled(false);
-          ui.setChecked(state);
-        }
-      }
     });
     return ui;
   };

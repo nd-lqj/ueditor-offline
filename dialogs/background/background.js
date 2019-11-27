@@ -312,7 +312,6 @@
                         src = img.getAttribute('_src');
                     list.push({
                         src: src,
-                        _src: src,
                         floatStyle: align
                     });
                 }
@@ -329,5 +328,4 @@
     dialog.oncancel = function () {
         editor.execCommand('background', backupStyle);
     };
-
 })();

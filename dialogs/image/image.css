@@ -192,8 +192,6 @@
     width: 180px;
     margin-right: 5px;
 }
-#remote #lock{
-}
 #remote #lockicon{
     zoom: 1;
     _display:inline;
@@ -210,7 +208,6 @@
     z-index: 9999;
     margin-top: 10px;
     background-color: #eee;
-    /* overflow: hidden; */
     overflow: auto;
 }
 

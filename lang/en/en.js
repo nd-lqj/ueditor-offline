@@ -16,8 +16,8 @@ UE.I18N['en'] = {
         'deleterow':'DeleteRow', 'deletecol':'DeleteCol', 'splittorows':'SplitToRows','insertcode':'insert code',
         'splittocols':'SplitToCols', 'splittocells':'SplitToCells','deletecaption':'DeleteCaption','inserttitle':'InsertTitle',
         'mergecells':'MergeCells', 'deletetable':'DeleteTable', 'cleardoc':'Clear', 'insertparagraphbeforetable':"InsertParagraphBeforeTable",
-        'fontfamily':'FontFamily', 'fontsize':'FontSize', 'paragraph':'Paragraph','simpleupload':'Single Image','insertimage':'Multi Image','edittable':'Edit Table', 'edittd':'Edit Td','link':'Link',
-        'emotion':'Emotion', 'spechars':'Spechars', 'searchreplace':'SearchReplace', 'map':'BaiduMap', 'gmap':'GoogleMap',
+        'fontfamily':'FontFamily', 'fontsize':'FontSize', 'paragraph':'Paragraph', 'insertimage':'Multi Image','edittable':'Edit Table', 'edittd':'Edit Td','link':'Link',
+        'spechars':'Spechars', 'searchreplace':'SearchReplace', 'map':'BaiduMap', 'gmap':'GoogleMap',
         'insertvideo':'Video', 'help':'Help', 'justifyleft':'JustifyLeft', 'justifyright':'JustifyRight', 'justifycenter':'JustifyCenter',
         'justifyjustify':'Justify', 'forecolor':'FontColor', 'backcolor':'BackColor',
         'fullscreen':'FullScreen', 'directionalityltr':'EnterFromLeft', 'directionalityrtl':'EnterFromRight',
@@ -48,14 +48,6 @@ UE.I18N['en'] = {
         'hi':'Highlight'
     },
     'autoupload': {
-        'exceedSizeError': 'File Size Exceed',
-        'exceedTypeError': 'File Type Not Allow',
-        'jsonEncodeError': 'Server Return Format Error',
-        'loading':"loading...",
-        'loadError':"load error",
-        'errorLoadConfig': 'Server config not loaded, upload can not work.',
-    },
-    'simpleupload':{
         'exceedSizeError': 'File Size Exceed',
         'exceedTypeError': 'File Type Not Allow',
         'jsonEncodeError': 'Server Return Format Error',
@@ -255,7 +247,7 @@ UE.I18N['en'] = {
             'lang_imgLoading':"Loading...",
             'lang_start_upload':"Start Upload",
             'lock':{'title':"Lock rate"},
-            'searchType':{'title':"ImageType", 'options':["News", "Wallpaper", "emotions", "photo"]},
+            'searchType':{'title':"ImageType", 'options':["News", "Wallpaper", "photo"]},
             'searchTxt':{'value':"Enter the search keyword!"},
             'searchBtn':{'value':"Search"},
             'searchReset':{'value':"Clear"},
@@ -482,17 +474,6 @@ UE.I18N['en'] = {
             'lang_chart_type': 'Chart type:',
             'lang_prev_btn': 'Previous',
             'lang_next_btn': 'Next'
-        }
-    },
-    emotion:{
-        'static':{
-            'lang_input_choice':'Choice',
-            'lang_input_Tuzki':'Tuzki',
-            'lang_input_lvdouwa':'LvDouWa',
-            'lang_input_BOBO':'BOBO',
-            'lang_input_babyCat':'BabyCat',
-            'lang_input_bubble':'Bubble',
-            'lang_input_youa':'YouA'
         }
     },
     gmap:{

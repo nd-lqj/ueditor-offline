@@ -16,8 +16,8 @@ UE.I18N['zh-cn'] = {
         'deleterow':'删除行', 'deletecol':'删除列', 'splittorows':'拆分成行',
         'splittocols':'拆分成列', 'splittocells':'完全拆分单元格','deletecaption':'删除表格标题','inserttitle':'插入标题',
         'mergecells':'合并多个单元格', 'deletetable':'删除表格', 'cleardoc':'清空文档','insertparagraphbeforetable':"表格前插入行",'insertcode':'代码语言',
-        'fontfamily':'字体', 'fontsize':'字号', 'paragraph':'段落格式', 'simpleupload':'单图上传', 'insertimage':'图片上传','edittable':'表格属性','edittd':'单元格属性', 'link':'超链接',
-        'emotion':'表情', 'spechars':'特殊字符', 'searchreplace':'查询替换', 'map':'Baidu地图', 'gmap':'Google地图',
+        'fontfamily':'字体', 'fontsize':'字号', 'paragraph':'段落格式', 'insertimage':'图片上传','edittable':'表格属性','edittd':'单元格属性', 'link':'超链接',
+        'spechars':'特殊字符', 'searchreplace':'查询替换', 'map':'Baidu地图', 'gmap':'Google地图',
         'insertvideo':'视频', 'help':'帮助', 'justifyleft':'居左对齐', 'justifyright':'居右对齐', 'justifycenter':'居中对齐',
         'justifyjustify':'两端对齐', 'forecolor':'字体颜色', 'backcolor':'背景色',
         'fullscreen':'全屏', 'directionalityltr':'从左向右输入', 'directionalityrtl':'从右向左输入',
@@ -48,14 +48,6 @@ UE.I18N['zh-cn'] = {
         'hi':'明显强调'
     },
     'autoupload': {
-        'exceedSizeError': '文件大小超出限制',
-        'exceedTypeError': '文件格式不允许',
-        'jsonEncodeError': '服务器返回格式错误',
-        'loading':"正在上传...",
-        'loadError':"上传错误",
-        'errorLoadConfig': '后端配置项没有正常加载，上传插件不能正常使用！'
-    },
-    'simpleupload':{
         'exceedSizeError': '文件大小超出限制',
         'exceedTypeError': '文件格式不允许',
         'jsonEncodeError': '服务器返回格式错误',
@@ -484,17 +476,6 @@ UE.I18N['zh-cn'] = {
             'lang_chart_type': '图表类型：',
             'lang_prev_btn': '上一个',
             'lang_next_btn': '下一个'
-        }
-    },
-    'emotion':{
-        'static':{
-            'lang_input_choice':'精选',
-            'lang_input_Tuzki':'兔斯基',
-            'lang_input_BOBO':'BOBO',
-            'lang_input_lvdouwa':'绿豆蛙',
-            'lang_input_babyCat':'baby猫',
-            'lang_input_bubble':'泡泡',
-            'lang_input_youa':'有啊'
         }
     },
     'gmap':{
