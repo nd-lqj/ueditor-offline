@@ -25,7 +25,7 @@
             <td><label for="title"> <var id="lang_input_title"></var></label></td>
             <td><input class="txt" id="title" type="text"/></td>
         </tr>
-        <tr>
+        <tr id="open_in_window">
              <td colspan="2">
                  <label for="target"><var id="lang_input_target"></var></label>
                  <input id="target" type="checkbox"/>
@@ -33,6 +33,13 @@
         </tr>
     </table>
 <script type="text/javascript">
+    const config = editor.options.subConfig || {};
+    const linkConfig = config ? config.link : {};
+
+    // 根据配置隐藏open in new window选项
+    if (!linkConfig || !linkConfig.openInNewWindow) {
+        document.getElementById('open_in_window').style.display = 'none';
+    }
     var range = editor.selection.getRange(),
         link = range.collapsed ? editor.queryCommandValue( "link" ) : editor.selection.getStart(),
         url,
